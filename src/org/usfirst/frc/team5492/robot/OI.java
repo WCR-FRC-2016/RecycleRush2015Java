@@ -1,7 +1,6 @@
 package org.usfirst.frc.team5492.robot;
 
 import edu.wpi.first.wpilibj.buttons.Button;
-import org.usfirst.frc.team5492.robot.commands.ExampleCommand;
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
@@ -16,7 +15,7 @@ public class OI {
     // Joystick stick = new Joystick(port);
     // Button button = new JoystickButton(stick, buttonNumber);
 	Joystick leftStick = new Joystick(0);
-    
+    Joystick rightStick = new Joystick(1);
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to
     // commands the same as any other Button.
@@ -37,8 +36,12 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	
-	public Joystick getJoystick() {
+	public Joystick getLeftStick() {
 		return leftStick;
+	}
+	
+	public Joystick getRightStick(){
+		return rightStick;
 	}
 }
 

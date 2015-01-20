@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5492.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -8,6 +9,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Talon;
+
 import org.usfirst.frc.team5492.robot.commands.MecanumDriveWithJoysticks;
 /**
  *
@@ -39,6 +41,17 @@ public class DriveTrain extends Subsystem {
     	
     	accelerometer = new BuiltInAccelerometer();
     	gyro = new Gyro(9);
+    	
+    	LiveWindow.addActuator("Drive Train", "Front_Left Motor", (Talon) front_left_motor);
+    	LiveWindow.addActuator("Drive Train", "Back Left Motor", (Talon) back_left_motor);
+    	LiveWindow.addActuator("Drive Train", "Front Right Motor", (Talon) front_right_motor);
+    	LiveWindow.addActuator("Drive Train", "Back Right Motor", (Talon) back_right_motor);
+    	LiveWindow.addSensor("Drive Train", "Front Left Encoder", front_left_encoder);
+    	LiveWindow.addSensor("Drive Train", "Back Left Encoder", back_left_encoder);
+    	LiveWindow.addSensor("Drive Train", "Front Right Encoder", front_right_encoder);
+    	LiveWindow.addSensor("Drive Train", "Back Right Encoder", front_left_encoder);
+    	LiveWindow.addSensor("Drive Train", "Accelerometer", accelerometer);
+    	LiveWindow.addSensor("Drive Train", "Gyro", gyro);
     }
 
     public void initDefaultCommand() {
@@ -58,6 +71,10 @@ public class DriveTrain extends Subsystem {
     	drive.mecanumDrive_Cartesian(x, y, rotation, gyroAngle);
     }
     
+    public void Stop(double gyroAngle, double Kp){
+    	drive.drive(0, -gyroAngle * Kp);
+    }
+    
     public double getHeading(){
     	return gyro.getAngle();
     }
@@ -74,4 +91,3 @@ public class DriveTrain extends Subsystem {
     	return (front_left_encoder.getDistance() + back_left_encoder.getDistance() + front_right_encoder.getDistance() + back_right_encoder.getDistance())/4;
     }
 }
-

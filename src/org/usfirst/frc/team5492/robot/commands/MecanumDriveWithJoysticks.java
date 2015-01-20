@@ -20,7 +20,7 @@ public class MecanumDriveWithJoysticks extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.drive(Robot.oi.getJoystick().getY(), Robot.oi.getJoystick().getX(), Robot.oi.getJoystick().getZ(), Robot.drivetrain.getHeading());
+    	Robot.drivetrain.drive(Robot.oi.getLeftStick().getX(), Robot.oi.getLeftStick().getY(), Robot.oi.getRightStick().getX(), Robot.drivetrain.getHeading());
     }
 
     // Make this return true when this Command no longer needs to run execute()
