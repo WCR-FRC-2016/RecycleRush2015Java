@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.usfirst.frc.team5492.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team5492.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -15,9 +15,11 @@ import org.usfirst.frc.team5492.robot.subsystems.DriveTrain;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
-	public static OI oi;
+	
 	public static DriveTrain drivetrain;
+	public static Elevator elevator;
+	public static Claw claw;
+	public static OI oi;
 
     Command autonomousCommand;
 

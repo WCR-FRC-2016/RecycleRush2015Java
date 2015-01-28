@@ -6,48 +6,37 @@ import org.usfirst.frc.team5492.robot.Robot;
 /**
  *
  */
-public class MecanumDriveWithJoysticks extends Command {
-
-    public MecanumDriveWithJoysticks() {
+public class SetClawSetpoint extends Command {
+	private double setpoint;
+	
+    public SetClawSetpoint(double setpoint) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivetrain);
+    	this.setpoint = setpoint;
+    	requires(Robot.claw);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.claw.enable();
+    	Robot.claw.setSetpoint(setpoint);;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double x = Robot.oi.getLeftStick().getRawAxis(0);
-    	double x1 = Robot.oi.getLeftStick().getRawAxis(3) - Robot.oi.getLeftStick().getRawAxis(2);
-    	double y = Robot.oi.getLeftStick().getRawAxis(1);
-    	double rot = Robot.oi.getLeftStick().getRawAxis(4);
-    	if(Math.abs(x1) < .2)
-    		x1 = 0;
-    	if(Math.abs(x) < .2)
-    		x = 0;
-    	if(Math.abs(y) < .2)
-    		y = 0;
-    	if(Math.abs(rot) < .2)
-    		rot = 0;
-    	Robot.drivetrain.drive(x, x1, y, rot, Robot.drivetrain.getHeading());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Robot.claw.onTarget();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drivetrain.drive(0, 0, 0, 0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }
