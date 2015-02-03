@@ -24,7 +24,7 @@ public class PrepareToPickupStackedLongTote extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addParallel(new SetClawSetpoint(.8));
-    	addSequential(new SetElevatorSetpoint(.2));
+    	addParallel(new PrepareToPickupLongTote());
+    	addSequential(new SetElevatorSetpoint(1));
     }
 }

@@ -1,17 +1,20 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.usfirst.frc.team5492.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team5492.robot.Robot;
 
 /**
- *
+ * Opens the claw for one second. Real robots should use sensors, stalling
+ * motors is BAD!
  */
-public class MecanumDriveWithJoysticks extends Command {
-
-    public MecanumDriveWithJoysticks() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.drivetrain);
+public class OpenClaw extends Command {
+    
+    public OpenClaw() {
+        requires(Robot.claw);
     }
 
     // Called just before this Command runs the first time
@@ -20,31 +23,22 @@ public class MecanumDriveWithJoysticks extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double x = Robot.oi.getLeftStick().getRawAxis(3) - Robot.oi.getLeftStick().getRawAxis(2);
-    	double y = Robot.oi.getLeftStick().getRawAxis(1);
-    	double rot = Robot.oi.getLeftStick().getRawAxis(4);
-    	if(Math.abs(x) < .2)
-    		x = 0;
-    	if(Math.abs(y) < .2)
-    		y = 0;
-    	if(Math.abs(rot) < .2)
-    		rot = 0;
-    	Robot.drivetrain.drive(x, y, rot, Robot.drivetrain.getHeading());
+    	Robot.claw.open();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Robot.claw.isOpen();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drivetrain.drive(0, 0, 0, 0);
+        Robot.claw.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
+        end();
     }
 }

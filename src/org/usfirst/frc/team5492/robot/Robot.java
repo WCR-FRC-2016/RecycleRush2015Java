@@ -2,6 +2,7 @@
 package org.usfirst.frc.team5492.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -18,10 +19,12 @@ public class Robot extends IterativeRobot {
 	
 	public static DriveTrain drivetrain;
 	public static Elevator elevator;
+	public static WheelArm wheelarm;
 	public static Claw claw;
 	public static OI oi;
 
     Command autonomousCommand;
+    SendableChooser autoChooser;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -30,7 +33,18 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
 		drivetrain = new DriveTrain();
+		claw = new Claw();
+		wheelarm = new WheelArm();
         // instantiate the command used for the autonomous period
+		/*autoChooser = new SendableChooser();
+		autoChooser.addDefault("Default program(Move to Auto Zone)", new MoveToAutoZone());
+		autoChooser.addObject("Move Tote to Auto Zone", new ToteToAuto());
+		autoChooser.addObject("Move Can to Auto Zone", new CanToAuto());
+		autoChooser.addObject("Move Can + Tote to Auto Zone", new CanAndToteToAuto());
+		autoChooser.addObject("Stacked Tote Set", new StackedToteSet());
+		autoChooser.addObject("Get Cans from Step", new CansFromStep());
+		autoChooser.addObject("Start Stacking Grey Totes", new StackGreyTotes());
+    */
     }
 	
 	public void disabledPeriodic() {
@@ -47,6 +61,7 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        log();
     }
 
     public void teleopInit() {
@@ -70,6 +85,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        log();
     }
     
     /**
@@ -78,4 +94,10 @@ public class Robot extends IterativeRobot {
     public void testPeriodic() {
         LiveWindow.run();
     }
-}
+    
+    private void log() {
+    	//wheelarm.log();
+        elevator.log();
+        drivetrain.log();
+        claw.log();
+    }}
