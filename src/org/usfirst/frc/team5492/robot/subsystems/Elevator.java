@@ -38,6 +38,10 @@ public class Elevator extends PIDSubsystem {
         LiveWindow.addActuator("Elevator", "PID", getPIDController());
     }
     
+    public void manual(double setpoint){
+    	Elevator_Motor.set(setpoint);
+    }
+    
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());

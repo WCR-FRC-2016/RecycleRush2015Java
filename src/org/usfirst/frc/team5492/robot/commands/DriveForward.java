@@ -1,19 +1,23 @@
 package org.usfirst.frc.team5492.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team5492.robot.Robot;
 
 /**
  *
  */
 public class DriveForward extends Command {
-
-    public DriveForward() {
+	double feet;
+    public DriveForward(double feet) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.drivetrain);
+    	this.feet = feet;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.drivetrain.driveForward(feet);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -27,6 +31,7 @@ public class DriveForward extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.drivetrain.driveNormal();
     }
 
     // Called when another command which requires one or more of the same

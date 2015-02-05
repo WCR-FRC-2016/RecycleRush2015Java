@@ -1,6 +1,8 @@
 package org.usfirst.frc.team5492.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import org.usfirst.frc.team5492.robot.commands.*;
+import edu.wpi.first.wpilibj.buttons.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -15,6 +17,39 @@ public class OI {
     // Button button = new JoystickButton(stick, buttonNumber);
 	Joystick leftStick = new Joystick(0);
     Joystick rightStick = new Joystick(1);
+    
+    public OI(){
+    	Button CloseClaw = new JoystickButton(rightStick, 1);
+        Button OpenClaw = new JoystickButton(rightStick, 2);
+        Button PrepareLong = new JoystickButton(rightStick, 5);
+        Button PrepareShort = new JoystickButton(rightStick, 3);
+        Button PrepareStackedShort = new JoystickButton(rightStick, 4);
+        double Elevator = rightStick.getRawAxis(6);
+        Button PickupItem = new JoystickButton(rightStick, 6);
+        Button PickupAnotherTote = new JoystickButton(rightStick, 7);
+        Button PickupFromPS = new JoystickButton(rightStick, 9);
+        Button PlaceFromPS = new JoystickButton(rightStick, 10);
+        Button OVERRIDE = new JoystickButton(rightStick, 11);
+        
+        
+        CloseClaw.whenPressed(new CloseClaw()); 
+        OpenClaw.whenPressed(new OpenClaw());
+        PrepareLong.whenPressed(new PrepareToPickupLongTote());
+        PrepareShort.whenPressed(new PrepareToPickupShortTote());
+        if(Elevator == -1)
+        	Robot.elevator.setSetpoint(Robot.elevator.getSetpoint() + 1);
+        if(Elevator == 1)
+        	Robot.elevator.setSetpoint(Robot.elevator.getSetpoint() - 1);
+        PrepareStackedShort.whenPressed(new PrepareToPickupStackedShortTote());
+        PickupItem.whenPressed(new PickupItem());
+        PickupAnotherTote.whenPressed(new PickupAnotherTote());
+        PickupFromPS.whenPressed(new PickupFromStation());
+        PlaceFromPS.whenPressed(new PlaceFromPlayerStation());
+        OVERRIDE.whenPressed(new ManualControl());
+    }
+    
+    
+    
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to
     // commands the same as any other Button.

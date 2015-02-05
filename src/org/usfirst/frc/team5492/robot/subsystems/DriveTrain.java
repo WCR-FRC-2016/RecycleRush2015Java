@@ -43,10 +43,7 @@ public class DriveTrain extends Subsystem {
     							front_right_motor, back_right_motor);
     	gyro = new Gyro(0);
     	
-    	front_left_motor.changeControlMode(CANTalon.ControlMode.Speed);
-    	back_left_motor.changeControlMode(CANTalon.ControlMode.Speed);
-    	front_right_motor.changeControlMode(CANTalon.ControlMode.Speed);
-    	back_right_motor.changeControlMode(CANTalon.ControlMode.Speed);
+    	driveNormal();
     	
     	front_left_motor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     	back_left_motor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
@@ -120,6 +117,36 @@ public class DriveTrain extends Subsystem {
         current4 = pdp.getCurrent(RobotMap.back_right_current);
     }
     
+    public void strafeRight(double feet){
+    	front_left_motor.changeControlMode(CANTalon.ControlMode.Position);
+    	back_left_motor.changeControlMode(CANTalon.ControlMode.Position);
+    	front_right_motor.changeControlMode(CANTalon.ControlMode.Position);
+    	back_right_motor.changeControlMode(CANTalon.ControlMode.Position);
+    	front_left_motor.set(findTicks(feet));
+        back_left_motor.set(findTicks(-feet));
+        front_right_motor.set(findTicks(-feet));
+        back_right_motor.set(findTicks(feet));
+    }
+    
+    public void driveForward(double feet){
+    	front_left_motor.changeControlMode(CANTalon.ControlMode.Position);
+    	back_left_motor.changeControlMode(CANTalon.ControlMode.Position);
+    	front_right_motor.changeControlMode(CANTalon.ControlMode.Position);
+    	back_right_motor.changeControlMode(CANTalon.ControlMode.Position);
+    	front_left_motor.set(findTicks(feet));
+        back_left_motor.set(findTicks(feet));
+        front_right_motor.set(findTicks(feet));
+        back_right_motor.set(findTicks(feet));
+        
+    }
+    
+    public void driveNormal(){
+    	front_left_motor.changeControlMode(CANTalon.ControlMode.Speed);
+    	back_left_motor.changeControlMode(CANTalon.ControlMode.Speed);
+    	front_right_motor.changeControlMode(CANTalon.ControlMode.Speed);
+    	back_right_motor.changeControlMode(CANTalon.ControlMode.Speed);
+    }
+    
     public void Stop(){
     	drive.stopMotor();
     }
@@ -130,6 +157,10 @@ public class DriveTrain extends Subsystem {
     
     public void reset(){
     	//gyro.reset();
+    }
+    
+    private double findTicks(double feet){
+    	return (feet * 250) / (2 * Math.PI * 3);
     }
     
     private double findSpeed(double input){

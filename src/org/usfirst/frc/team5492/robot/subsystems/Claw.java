@@ -36,6 +36,10 @@ public class Claw extends PIDSubsystem {
     	LiveWindow.addActuator("Claw",  "PID", getPIDController());
     }
     
+    public void manual(double setpoint){
+    	Claw_Motor.set(setpoint);
+    }
+    
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());

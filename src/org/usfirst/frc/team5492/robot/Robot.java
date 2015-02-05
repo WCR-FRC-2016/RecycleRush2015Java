@@ -1,6 +1,9 @@
 
 package org.usfirst.frc.team5492.robot;
 
+import org.usfirst.frc.team5492.robot.auto.*;
+
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.command.Command;
@@ -36,13 +39,13 @@ public class Robot extends IterativeRobot {
 		claw = new Claw();
 		wheelarm = new WheelArm();
         // instantiate the command used for the autonomous period
-		/*autoChooser = new SendableChooser();
-		autoChooser.addDefault("Default program(Move to Auto Zone)", new MoveToAutoZone());
-		autoChooser.addObject("Move Tote to Auto Zone", new ToteToAuto());
+		autoChooser = new SendableChooser();
+		autoChooser.addDefault("Default program(Move to Auto Zone)", new DriveToAuto());
 		autoChooser.addObject("Move Can to Auto Zone", new CanToAuto());
+		autoChooser.addObject("Move Tote to Auto Zone", new ToteToAuto());
 		autoChooser.addObject("Move Can + Tote to Auto Zone", new CanAndToteToAuto());
 		autoChooser.addObject("Stacked Tote Set", new StackedToteSet());
-		autoChooser.addObject("Get Cans from Step", new CansFromStep());
+		/*autoChooser.addObject("Get Cans from Step", new CansFromStep());
 		autoChooser.addObject("Start Stacking Grey Totes", new StackGreyTotes());
     */
     }
