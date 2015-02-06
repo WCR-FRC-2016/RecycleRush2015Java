@@ -24,7 +24,7 @@ public class OI {
         Button PrepareLong = new JoystickButton(rightStick, 5);
         Button PrepareShort = new JoystickButton(rightStick, 3);
         Button PrepareStackedShort = new JoystickButton(rightStick, 4);
-        double Elevator = rightStick.getRawAxis(6);
+        //double Elevator = rightStick.getRawAxis(6);
         Button PickupItem = new JoystickButton(rightStick, 6);
         Button PickupAnotherTote = new JoystickButton(rightStick, 7);
         Button PickupFromPS = new JoystickButton(rightStick, 9);
@@ -32,14 +32,15 @@ public class OI {
         Button OVERRIDE = new JoystickButton(rightStick, 11);
         
         
-        CloseClaw.whenPressed(new CloseClaw()); 
+        //CloseClaw.whenPressed(new CloseClaw()); 
         OpenClaw.whenPressed(new OpenClaw());
         PrepareLong.whenPressed(new PrepareToPickupLongTote());
         PrepareShort.whenPressed(new PrepareToPickupShortTote());
-        if(Elevator == -1)
+        /*if(Elevator == -1)
         	Robot.elevator.setSetpoint(Robot.elevator.getSetpoint() + 1);
         if(Elevator == 1)
         	Robot.elevator.setSetpoint(Robot.elevator.getSetpoint() - 1);
+       */
         PrepareStackedShort.whenPressed(new PrepareToPickupStackedShortTote());
         PickupItem.whenPressed(new PickupItem());
         PickupAnotherTote.whenPressed(new PickupAnotherTote());

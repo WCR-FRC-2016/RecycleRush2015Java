@@ -1,6 +1,6 @@
 package org.usfirst.frc.team5492.robot.subsystems;
 
-import org.usfirst.frc.team5492.robot.Robot;
+
 import org.usfirst.frc.team5492.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -25,7 +25,7 @@ public class Claw extends PIDSubsystem {
     // Initialize your subsystem here
     public Claw() {
     	super(kP, kI, kD);
-    	Claw_Motor = new CANTalon(RobotMap.Claw_Motor_CAN);
+    	Claw_Motor = new CANTalon(0);//RobotMap.Claw_Motor_CAN);
     	Claw_LS = new DigitalInput(RobotMap.Claw_LS_DI);
     	Claw_Pot = new AnalogPotentiometer(RobotMap.Claw_Pot_AI, 1);
         // Use these to get going:

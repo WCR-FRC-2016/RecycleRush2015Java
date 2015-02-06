@@ -39,7 +39,7 @@ public class Robot extends IterativeRobot {
 		claw = new Claw();
 		wheelarm = new WheelArm();
         // instantiate the command used for the autonomous period
-		autoChooser = new SendableChooser();
+		/*autoChooser = new SendableChooser();
 		autoChooser.addDefault("Default program(Move to Auto Zone)", new DriveToAuto());
 		autoChooser.addObject("Move Can to Auto Zone", new CanToAuto());
 		autoChooser.addObject("Move Tote to Auto Zone", new ToteToAuto());
