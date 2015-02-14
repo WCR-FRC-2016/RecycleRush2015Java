@@ -8,8 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team5492.robot.Robot;
 
 /**
- * Opens the claw for one second. Real robots should use sensors, stalling
- * motors is BAD!
+ * Opens the claw to setpoint of .5
  */
 public class OpenClaw extends Command {
     

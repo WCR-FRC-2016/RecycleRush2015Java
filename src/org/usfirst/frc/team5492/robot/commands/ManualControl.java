@@ -5,7 +5,7 @@ import org.usfirst.frc.team5492.robot.*;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * For when the sensors mess up, this allows a joystick to control arm movement
  */
 public class ManualControl extends Command {
 

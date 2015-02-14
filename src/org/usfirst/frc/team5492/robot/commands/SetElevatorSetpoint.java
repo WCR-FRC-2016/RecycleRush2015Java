@@ -12,6 +12,10 @@ public class SetElevatorSetpoint extends Command {
     public SetElevatorSetpoint(double setpoint) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	if(setpoint > 5)
+    		setpoint = 5;
+    	if(setpoint < 0)
+    		setpoint = 0;
     	this.setpoint = setpoint;
     	requires(Robot.elevator);
     }

@@ -1,13 +1,14 @@
-package org.usfirst.frc.team5492.robot.commands;
+package org.usfirst.frc.team5492.robot.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ *	Goal is to pickup grey totes & start stacking
+ * (Probably won't use this because it's last priority)
  */
-public class PrepareToPickupStackedShortTote extends CommandGroup {
+public class StackGreyTotes extends CommandGroup {
     
-    public  PrepareToPickupStackedShortTote() {
+    public  StackGreyTotes() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -24,7 +25,5 @@ public class PrepareToPickupStackedShortTote extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addParallel(new PrepareToPickupShortTote());
-    	addSequential(new SetElevatorSetpoint(1));
     }
 }

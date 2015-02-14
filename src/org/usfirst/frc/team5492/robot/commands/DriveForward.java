@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team5492.robot.Robot;
 
 /**
- *
+ * Mainly for Auton - you input  certain amount of feet to drive forward or negative feet to drive back
  */
 public class DriveForward extends Command {
 	double feet;
@@ -31,7 +31,6 @@ public class DriveForward extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drivetrain.driveNormal();
     }
 
     // Called when another command which requires one or more of the same

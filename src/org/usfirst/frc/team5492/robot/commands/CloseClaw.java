@@ -8,8 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team5492.robot.Robot;
 
 /**
- * Closes the claw for one second. Real robots should use sensors, stalling
- * motors is BAD!
+ * Closes the claw until a limit switch is triggered
  */
 public class CloseClaw extends Command {
     

@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team5492.robot.Robot;
 
 /**
- *
+ * Calls Claw class setSetpoint method to set the claw to desired position
  */
 public class SetClawSetpoint extends Command {
 	private double setpoint;

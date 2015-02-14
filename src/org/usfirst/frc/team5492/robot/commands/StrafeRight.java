@@ -3,7 +3,7 @@ package org.usfirst.frc.team5492.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team5492.robot.Robot;
 /**
- *
+ * Given x amount of ft, the robot will strafe that far, of negative x amount, which will go backwards
  */
 public class StrafeRight extends Command {
 	double feet;

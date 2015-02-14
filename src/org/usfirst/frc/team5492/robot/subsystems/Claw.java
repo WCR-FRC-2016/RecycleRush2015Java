@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
 /**
- *
+ *	Contains all methods for Controlling Claw
  */
 public class Claw extends PIDSubsystem {
 	PowerDistributionPanel pdp;
@@ -21,17 +21,13 @@ public class Claw extends PIDSubsystem {
 	private AnalogPotentiometer Claw_Pot;
 	
 	private static final double kP = 0.0, kI = 0.0, kD = 0.0;
-
     // Initialize your subsystem here
     public Claw() {
     	super(kP, kI, kD);
-    	Claw_Motor = new CANTalon(0);//RobotMap.Claw_Motor_CAN);
+    	setAbsoluteTolerance(0.005);
+    	Claw_Motor = new CANTalon(RobotMap.Claw_Motor_CAN);
     	Claw_LS = new DigitalInput(RobotMap.Claw_LS_DI);
-    	Claw_Pot = new AnalogPotentiometer(RobotMap.Claw_Pot_AI, 1);
-        // Use these to get going:
-        // setSetpoint() -  Sets where the PID controller should move the system
-        //                  to
-        // enable() - Enables the PID controller.
+    	Claw_Pot = new AnalogPotentiometer(RobotMap.Claw_Pot_AI, 3600, 0);
     	LiveWindow.addSensor("Claw", "Pot", (AnalogPotentiometer)Claw_Pot);
     	LiveWindow.addActuator("Claw",  "PID", getPIDController());
     }
@@ -57,11 +53,11 @@ public class Claw extends PIDSubsystem {
     }
     
     public boolean isClosed(){
-    	return getSetpoint() == 0;
+    	return getSetpoint() == RobotMap.close_claw;
     }
     
     public boolean isOpen(){
-    	return getSetpoint() == .5;
+    	return getSetpoint() == RobotMap.open_claw;
     }
     
     protected double returnPIDInput() {
@@ -81,14 +77,14 @@ public class Claw extends PIDSubsystem {
      * Set the claw motor to move in the open direction.
      */
     public void open() {
-        setSetpoint(.5);
+        setSetpoint(RobotMap.open_claw);
     }
 
     /**
      * Set the claw motor to move in the close direction.
      */
     public void close() {
-        setSetpoint(0);
+        setSetpoint(RobotMap.close_claw);
     }
     
     /**

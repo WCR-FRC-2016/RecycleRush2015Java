@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team5492.robot.Robot;
 
 /**
- *
+ * This gets input from the joysticks & then calls DriveTrain class
  */
 public class MecanumDriveWithJoysticks extends Command {
 
@@ -22,14 +22,14 @@ public class MecanumDriveWithJoysticks extends Command {
     protected void execute() {
     	double x = Robot.oi.getLeftStick().getRawAxis(3) - Robot.oi.getLeftStick().getRawAxis(2);
     	double y = Robot.oi.getLeftStick().getRawAxis(1);
-    	double rot = Robot.oi.getLeftStick().getRawAxis(4);
+    	double z = Robot.oi.getLeftStick().getRawAxis(4);
     	if(Math.abs(x) < .2)
     		x = 0;
     	if(Math.abs(y) < .2)
     		y = 0;
-    	if(Math.abs(rot) < .2)
-    		rot = 0;
-    	Robot.drivetrain.drive(x, -.5, rot, Robot.drivetrain.getHeading());
+    	if(Math.abs(z) < .2)
+    		z = 0;
+    	Robot.drivetrain.drive(x, y, z, 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
