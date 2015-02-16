@@ -20,9 +20,9 @@ import org.usfirst.frc.team5492.robot.subsystems.*;
  */
 public class Robot extends IterativeRobot {
 	
-	public static DriveTrain drivetrain;
-	public static Elevator elevator;
+	public static DriveTrain drivetrain;	
 	public static WheelArm wheelarm;
+	public static Elevator elevator;
 	public static Claw claw;
 	public static OI oi;
 

@@ -9,7 +9,8 @@ import org.usfirst.frc.team5492.robot.RobotMap;
 public class PickupItem extends CommandGroup {
     
     public  PickupItem() {
-    	addSequential(new OpenClaw());													//Opens Claw
+    	addParallel(new SuckInTote());															//Activates wheel arm
+    	addParallel(new OpenClaw());															//Opens Claw
 		addSequential(new SetElevatorSetpoint(RobotMap.level_one));	//Moves to level one
 		addSequential(new CloseClaw());													//Closes Claw
 		addSequential(new SetElevatorSetpoint(RobotMap.level_two));	//Moves to level two

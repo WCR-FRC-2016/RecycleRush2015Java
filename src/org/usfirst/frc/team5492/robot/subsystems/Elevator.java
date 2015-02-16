@@ -30,7 +30,7 @@ public class Elevator extends PIDSubsystem {
     	super(kP, kI, kD);
         setAbsoluteTolerance(0.005);
         Elevator_Motor1 = new CANTalon(RobotMap.Elevator_Motor1_CAN);
-        Elevator_Motor2 = new CANTalon(RobotMap.Elevaotr_Motor2_CAN);
+        Elevator_Motor2 = new CANTalon(RobotMap.Elevator_Motor2_CAN);
         Elevator_Pot = new AnalogPotentiometer(RobotMap.Elevator_Pot_AI, 3600, 0);
         
         LiveWindow.addSensor("Elevator",  "Pot",  (AnalogPotentiometer) Elevator_Pot);
