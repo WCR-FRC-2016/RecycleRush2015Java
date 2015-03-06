@@ -20,8 +20,7 @@ import org.usfirst.frc.team5492.robot.subsystems.*;
  */
 public class Robot extends IterativeRobot {
 	
-	public static DriveTrain drivetrain;	
-	public static WheelArm wheelarm;
+	public static DriveTrain drivetrain;
 	public static Elevator elevator;
 	public static Claw claw;
 	public static OI oi;
@@ -37,7 +36,6 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		drivetrain = new DriveTrain();
 		claw = new Claw();
-		wheelarm = new WheelArm();
         // instantiate the command used for the autonomous period
 		autoChooser = new SendableChooser();
 		autoChooser.addDefault("Default program(Move to Auto Zone)", new DriveToAuto());
@@ -46,7 +44,6 @@ public class Robot extends IterativeRobot {
 		autoChooser.addObject("Move Can + Tote to Auto Zone", new CanAndToteToAuto());
 		autoChooser.addObject("Stacked Tote Set", new StackedToteSet());
 		autoChooser.addObject("Get Cans from Step", new CansFromStep());
-		autoChooser.addObject("Start Stacking Grey Totes", new StackGreyTotes());
     }
 	
 	public void disabledPeriodic() {

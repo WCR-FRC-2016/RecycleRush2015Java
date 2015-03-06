@@ -9,7 +9,6 @@ import org.usfirst.frc.team5492.robot.RobotMap;
 public class PickupAnotherTote extends CommandGroup {
     
     public  PickupAnotherTote() {
-    	addParallel(new SuckInTote());
     	addSequential(new SetElevatorSetpoint(RobotMap.level_two));	//Moves to level 2
     	addSequential(new OpenClaw());													//Opens Claw
     	addSequential(new SetElevatorSetpoint(RobotMap.level_one));	//Moves to level 1

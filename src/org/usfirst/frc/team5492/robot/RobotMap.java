@@ -76,5 +76,4 @@ public class RobotMap {
     //Booleans
     //Claw
     public static boolean getTote = false;
-    
 }

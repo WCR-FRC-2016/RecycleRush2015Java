@@ -28,7 +28,6 @@ public class OI {
         Button PickupAnotherTote = new JoystickButton(rightStick, 3);	//Bottom Right on top to Pickup ANother tote
         Button PickupFromPS = new JoystickButton(rightStick, 6);			//#7 on stick, front left on bottom to do PS mode
         Button OVERRIDE = new JoystickButton(rightStick, 7);				//#8 on stick, to switch to manual control in case something breaks
-        Button suckIn = new JoystickButton(rightStick, 9);						//#10 on stick, to suck in totes
         
         CloseClaw.whenPressed(new CloseClaw()); 
         OpenClaw.whenPressed(new OpenClaw());
@@ -42,7 +41,6 @@ public class OI {
         PickupAnotherTote.whenPressed(new PickupAnotherTote());
         PickupFromPS.whenPressed(new PickupFromStation());
         OVERRIDE.whileHeld(new ManualControl());
-        suckIn.whileHeld(new SuckInTote());
     }
     
     
