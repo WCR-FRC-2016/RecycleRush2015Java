@@ -42,6 +42,7 @@ public class OI {
         PickupAnotherTote.whenPressed(new PickupAnotherTote());
         PickupFromPS.whenPressed(new PickupFromStation());
         OVERRIDE.whileHeld(new ManualControl());
+        suckIn.whileHeld(new SuckInTote());
     }
     
     

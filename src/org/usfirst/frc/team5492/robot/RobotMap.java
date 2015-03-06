@@ -68,6 +68,10 @@ public class RobotMap {
     public static double long_tote = 0;
     public static double open_claw = 0;
     public static double close_claw = 0;    
+    
+    //Setpoins for WheelArm
+    public static double long_tote_wheel = 0;
+    public static double close_wheel = 0;
 
     //Booleans
     //Claw
