@@ -51,10 +51,6 @@ public class RobotMap {
     public static int Wheel_Pot_AI = 3;
     public static int Whel_Pot_AI = 4;
     
-    //Digital Inputs
-    //Claw
-    public static int Claw_LS_DI = 1;
-    
     //Setpoints for Elevator
     public static double level_one = 0;
     public static double level_two = 335.52;
@@ -64,16 +60,10 @@ public class RobotMap {
     public static double level_six = 1677.6;
     
     //Setpoints for Claw
+    public static double can = 0;
     public static double short_tote = 0;
     public static double long_tote = 0;
     public static double open_claw = 0;
-    public static double close_claw = 0;    
-    
-    //Setpoins for WheelArm
-    public static double long_tote_wheel = 0;
-    public static double close_wheel = 0;
-
-    //Booleans
-    //Claw
-    public static boolean getTote = false;
+    public static double close_claw = 0;
+    public static double claw_grab = 0;
 }

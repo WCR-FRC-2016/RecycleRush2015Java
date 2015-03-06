@@ -7,7 +7,7 @@ import org.usfirst.frc.team5492.robot.Robot;
  * Calls Claw class setSetpoint method to set the claw to desired position
  */
 public class SetClawSetpoint extends Command {
-	private double setpoint;
+	private double setpoint;	
 	
     public SetClawSetpoint(double setpoint) {
         // Use requires() here to declare subsystem dependencies
@@ -39,4 +39,8 @@ public class SetClawSetpoint extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     }
+    
+    public double getClawSetpoint(){
+		return setpoint;
+	}
 }

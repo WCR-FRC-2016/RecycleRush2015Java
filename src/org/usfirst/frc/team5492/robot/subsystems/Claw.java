@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 public class Claw extends PIDSubsystem {
 	PowerDistributionPanel pdp;
 	private CANTalon Claw_Motor;
-	private DigitalInput Claw_LS;
 	private AnalogPotentiometer Claw_Pot;
 	
 	private static final double kP = 0.0, kI = 0.0, kD = 0.0;
@@ -26,7 +25,6 @@ public class Claw extends PIDSubsystem {
     	super(kP, kI, kD);
     	setAbsoluteTolerance(0.005);
     	Claw_Motor = new CANTalon(RobotMap.Claw_Motor_CAN);
-    	Claw_LS = new DigitalInput(RobotMap.Claw_LS_DI);
     	Claw_Pot = new AnalogPotentiometer(RobotMap.Claw_Pot_AI, 3600, 0);
     	LiveWindow.addSensor("Claw", "Pot", (AnalogPotentiometer)Claw_Pot);
     	LiveWindow.addActuator("Claw",  "PID", getPIDController());
@@ -49,7 +47,7 @@ public class Claw extends PIDSubsystem {
     }
     
     public boolean isGrabbing(){
-    	return Claw_LS.get();
+    	return onTarget();
     }
     
     public boolean isClosed(){
