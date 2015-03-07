@@ -38,12 +38,12 @@ public class Robot extends IterativeRobot {
 		claw = new Claw();
         // instantiate the command used for the autonomous period
 		autoChooser = new SendableChooser();
-		autoChooser.addDefault("Default program(Move to Auto Zone)", new DriveToAuto());
-		autoChooser.addObject("Move Can to Auto Zone", new CanToAuto());
+		autoChooser.addDefault("Default program(Move to Auto Zone)", new RobotToAuto());
+		/*autoChooser.addObject("Move Can to Auto Zone", new CanToAuto());
 		autoChooser.addObject("Move Tote to Auto Zone", new ToteToAuto());
 		autoChooser.addObject("Move Can + Tote to Auto Zone", new CanAndToteToAuto());
 		autoChooser.addObject("Stacked Tote Set", new StackedToteSet());
-		autoChooser.addObject("Get Cans from Step", new CansFromStep());
+		autoChooser.addObject("Get Cans from Step", new CansFromStep());*/
     }
 	
 	public void disabledPeriodic() {
@@ -95,7 +95,6 @@ public class Robot extends IterativeRobot {
     }
     
     private void log() {
-    	//wheelarm.log();
         elevator.log();
         drivetrain.log();
         claw.log();

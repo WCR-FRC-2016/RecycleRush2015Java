@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5492.robot.subsystems;
 
 
+import org.usfirst.frc.team5492.robot.Robot;
 import org.usfirst.frc.team5492.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -36,6 +37,14 @@ public class Claw extends PIDSubsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	boolean CloseClaw = Robot.oi.getRightStick().getRawButton(0);
+    	boolean OpenClaw = Robot.oi.getRightStick().getRawButton(1);
+    	if(CloseClaw)
+    		manual(-1);
+    	else if(OpenClaw)
+    		manual(1);
+    	else
+    		manual(0);
     }
     
     
