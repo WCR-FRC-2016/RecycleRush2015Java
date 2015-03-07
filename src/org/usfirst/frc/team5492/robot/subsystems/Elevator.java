@@ -1,7 +1,7 @@
 package org.usfirst.frc.team5492.robot.subsystems;
 
 import org.usfirst.frc.team5492.robot.RobotMap;
-import org.usfirst.frc.team5492.robot.Robot;
+import org.usfirst.frc.team5492.robot.commands.ManualElevator;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -44,7 +44,7 @@ public class Elevator extends PIDSubsystem {
     }
     
     public void initDefaultCommand() {
-    	manual(Robot.oi.getRightStick().getRawAxis(1));
+    	setDefaultCommand(new ManualElevator());
         motor1_current = pdp.getCurrent(RobotMap.elevator_motor1_current);
         motor2_current = pdp.getCurrent(RobotMap.elevator_motor2_current);
     }
