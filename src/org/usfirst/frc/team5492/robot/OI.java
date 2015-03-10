@@ -16,10 +16,10 @@ public class OI {
     // Joystick stick = new Joystick(port);
     // Button button = new JoystickButton(stick, buttonNumber);
 	Joystick leftStick = new Joystick(0);
-    Joystick rightStick = new Joystick(1);
+    //Joystick rightStick = new Joystick(1);
     
     public OI(){
-    	Button CloseClaw = new JoystickButton(rightStick, 0);				//Trigger to Close Claw
+    	/*Button CloseClaw = new JoystickButton(rightStick, 0);				//Trigger to Close Claw
         Button OpenClaw = new JoystickButton(rightStick, 1);				//Thumb to Open Claw
         Button PrepareLong = new JoystickButton(rightStick, 4);			//Top Left on top to Prepare for long tote
         Button PrepareShort = new JoystickButton(rightStick, 2);			//Bottom Left on top to Prepare for short tote
@@ -29,7 +29,7 @@ public class OI {
         Button PickupFromPS = new JoystickButton(rightStick, 6);			//#7 on stick, front left on bottom to do PS mode
         Button OVERRIDE = new JoystickButton(rightStick, 7);				//#8 on stick, to switch to manual control in case something breaks
         
-        /*CloseClaw.whenPressed(new CloseClaw()); 
+        CloseClaw.whenPressed(new CloseClaw()); 
         OpenClaw.whenPressed(new OpenClaw());
         PrepareLong.whenPressed(new PrepareToPickupLongTote());
         PrepareShort.whenPressed(new PrepareToPickupShortTote());
@@ -70,7 +70,7 @@ public class OI {
 	}
 	
 	public Joystick getRightStick(){
-		return rightStick;
+		return leftStick;
 	}
 }
 

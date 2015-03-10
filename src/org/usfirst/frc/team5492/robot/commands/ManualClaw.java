@@ -28,7 +28,7 @@ public class ManualClaw extends Command {
     	else if(OpenClaw)
     		Robot.claw.manual(.5);
     	else
-    		Robot.claw.manual(0);
+    		Robot.claw.manual(.001);
     }
 
     // Make this return true when this Command no longer needs to run execute()

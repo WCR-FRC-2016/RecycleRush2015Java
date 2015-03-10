@@ -8,27 +8,27 @@ package org.usfirst.frc.team5492.robot;
 public class RobotMap {
 	//CANs
 	//DriveTrain
-	public static int front_left_motor_CAN = 1;
+	public static int front_left_motor_CAN = 4;
 	public static int back_left_motor_CAN = 0;
-	public static int front_right_motor_CAN = 2;
-	public static int back_right_motor_CAN = 3;
+	public static int front_right_motor_CAN = 1;
+	public static int back_right_motor_CAN = 2;
 	//Elevator
-	public static int Elevator_Motor1_CAN = 9;
-	public static int Elevator_Motor2_CAN = 8;
+	public static int Elevator_Motor1_CAN = 0;
+	public static int Elevator_Motor2_CAN = 0;
 	//Claw
-	public static int Claw_Motor_CAN = 10;
+	public static int Claw_Motor_CAN = 0;
 	//Wheel Arm
-	public static int Wheel_Motor1_CAN = 5;
-	public static int Wheel_Motor2_CAN = 6;
-	public static int Wheel_Motor3_CAN = 4;
-	public static int Wheel_Motor4_CAN = 7;
+	public static int Wheel_Motor1_CAN = 0;
+	public static int Wheel_Motor2_CAN = 0;
+	public static int Wheel_Motor3_CAN = 0;
+	public static int Wheel_Motor4_CAN = 0;
 	
 	//Currents
 	//DriveTrain
-	public static int front_left_current = 0;
-	public static int back_left_current = 3;
-	public static int front_right_current = 2;
-	public static int back_right_current = 1;
+	public static int front_left_current = 12;
+	public static int back_left_current = 13;
+	public static int front_right_current = 14;
+	public static int back_right_current = 15;
 	//Elevator
 	public static int elevator_motor1_current = 15;
 	public static int elevator_motor2_current = 14;

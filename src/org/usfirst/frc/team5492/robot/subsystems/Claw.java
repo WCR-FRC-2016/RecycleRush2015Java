@@ -24,14 +24,14 @@ public class Claw extends PIDSubsystem {
     public Claw() {
     	super(kP, kI, kD);
     	setAbsoluteTolerance(0.005);
-    	Claw_Motor = new CANTalon(RobotMap.Claw_Motor_CAN);
+    	//Claw_Motor = new CANTalon(RobotMap.Claw_Motor_CAN);
     	Claw_Pot = new AnalogPotentiometer(RobotMap.Claw_Pot_AI, 3600, 0);
     	LiveWindow.addSensor("Claw", "Pot", (AnalogPotentiometer)Claw_Pot);
     	LiveWindow.addActuator("Claw",  "PID", getPIDController());
     }
     
     public void manual(double setpoint){
-    	Claw_Motor.set(setpoint);
+    	//Claw_Motor.set(setpoint);
     }
     
     public void initDefaultCommand() {
@@ -45,10 +45,6 @@ public class Claw extends PIDSubsystem {
     	SmartDashboard.putData("Claw Pot", (AnalogPotentiometer) Claw_Pot);
     	SmartDashboard.putNumber("Claw Motor Temp",  Claw_Motor.getTemp());
     	SmartDashboard.putNumber("Claw Motor Current", pdp.getCurrent(RobotMap.claw_motor_current));
-    }
-    
-    public boolean isGrabbing(){
-    	return onTarget();
     }
     
     public boolean isClosed(){
