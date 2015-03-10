@@ -84,7 +84,6 @@ public class DriveTrain extends Subsystem {
     
     public void strafeRight(double feet){
     	drivePosition();
-    	setPIDs();
     	feet = feet +  (feet * .33);
     	front_left_motor.set(findTicks(feet));
         back_left_motor.set(findTicks(-feet));
@@ -94,7 +93,6 @@ public class DriveTrain extends Subsystem {
     
     public void driveForward(double feet){
     	drivePosition();
-    	setPIDs();
     	front_left_motor.set(findTicks(feet));
         back_left_motor.set(findTicks(feet));
         front_right_motor.set(findTicks(feet));
