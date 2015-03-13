@@ -30,12 +30,12 @@ public class RobotMap {
 	public static int front_right_current = 14;
 	public static int back_right_current = 15;
 	//Elevator
-	public static int elevator_motor1_current = 15;
-	public static int elevator_motor2_current = 14;
+	public static int elevator_motor1_current = 2;
+	public static int elevator_motor2_current = 1;
 	//Claw
-	public static int claw_motor_current = 13;
+	public static int claw_motor_current = 3;
 	//Wheel Arm
-	public static int wheel_motor1_current = 12;
+	public static int wheel_motor1_current = 4;
 	public static int wheel_motor2_current = 5;
 	public static int wheel_motor3_current = 6;
 	public static int wheel_motor4_current = 7;

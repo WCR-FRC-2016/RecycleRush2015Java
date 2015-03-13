@@ -8,9 +8,8 @@ import org.usfirst.frc.team5492.robot.Robot;
  */
 public class DriveForward extends Command {
 	double feet;
+	int count;
     public DriveForward(double feet) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.drivetrain);
     	this.feet = feet;
     }

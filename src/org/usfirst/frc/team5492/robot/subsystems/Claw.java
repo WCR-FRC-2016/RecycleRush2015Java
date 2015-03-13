@@ -31,13 +31,11 @@ public class Claw extends PIDSubsystem {
     }
     
     public void manual(double setpoint){
-    	//Claw_Motor.set(setpoint);
+    	Claw_Motor.set(setpoint);
     }
     
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    	setDefaultCommand(new ManualClaw());
+    	//setDefaultCommand(new ManualClaw());
     }
     
     
@@ -56,9 +54,6 @@ public class Claw extends PIDSubsystem {
     }
     
     protected double returnPIDInput() {
-        // Return your input value for the PID loop
-        // e.g. a sensor, like a potentiometer:
-        // yourPot.getAverageVoltage() / kYourMaxVoltage;
     	return Claw_Pot.get();
     }
     

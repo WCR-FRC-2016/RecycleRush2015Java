@@ -19,15 +19,15 @@ public class OI {
     //Joystick rightStick = new Joystick(1);
     
     public OI(){
-    	/*Button CloseClaw = new JoystickButton(rightStick, 0);				//Trigger to Close Claw
-        Button OpenClaw = new JoystickButton(rightStick, 1);				//Thumb to Open Claw
-        Button PrepareLong = new JoystickButton(rightStick, 4);			//Top Left on top to Prepare for long tote
-        Button PrepareShort = new JoystickButton(rightStick, 2);			//Bottom Left on top to Prepare for short tote
+    	/*Button CloseClaw = new JoystickButton(rightStick, 1);				//Trigger to Close Claw
+        Button OpenClaw = new JoystickButton(rightStick, 2);				//Thumb to Open Claw
+        Button PrepareLong = new JoystickButton(rightStick, 5);			//Top Left on top to Prepare for long tote
+        Button PrepareShort = new JoystickButton(rightStick, 3);			//Bottom Left on top to Prepare for short tote
         double Elevator = rightStick.getRawAxis(0);									//POV Y axis 
-        Button PickupItem = new JoystickButton(rightStick, 5);				//Top Right on top to Pickup Tote/Can	
-        Button PickupAnotherTote = new JoystickButton(rightStick, 3);	//Bottom Right on top to Pickup ANother tote
-        Button PickupFromPS = new JoystickButton(rightStick, 6);			//#7 on stick, front left on bottom to do PS mode
-        Button OVERRIDE = new JoystickButton(rightStick, 7);				//#8 on stick, to switch to manual control in case something breaks
+        Button PickupItem = new JoystickButton(rightStick, 6);				//Top Right on top to Pickup Tote/Can	
+        Button PickupAnotherTote = new JoystickButton(rightStick, 4);	//Bottom Right on top to Pickup ANother tote
+        Button PickupFromPS = new JoystickButton(rightStick, 7);			//#7 on stick, front left on bottom to do PS mode
+        Button OVERRIDE = new JoystickButton(rightStick, 8s);				//#8 on stick, to switch to manual control in case something breaks
         
         CloseClaw.whenPressed(new CloseClaw()); 
         OpenClaw.whenPressed(new OpenClaw());

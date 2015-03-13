@@ -9,6 +9,6 @@ public class ManualControl extends CommandGroup {
     
     public  ManualControl() {
         addParallel(new ManualClaw());
-        addParallel(new ManualElevator());
+        addSequential(new ManualElevator());
     }
 }

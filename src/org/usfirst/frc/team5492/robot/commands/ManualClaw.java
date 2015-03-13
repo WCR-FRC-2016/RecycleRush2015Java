@@ -8,11 +8,16 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ManualClaw extends Command {
+	
+	boolean CloseClaw;
+	boolean OpenClaw;
 
     public ManualClaw() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.claw);
+    	CloseClaw = false;
+    	OpenClaw = false;
     }
 
     // Called just before this Command runs the first time
@@ -21,14 +26,14 @@ public class ManualClaw extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	boolean CloseClaw = Robot.oi.getRightStick().getRawButton(0);
-    	boolean OpenClaw = Robot.oi.getRightStick().getRawButton(1);
+    	CloseClaw = Robot.oi.getRightStick().getRawButton(1);
+    	OpenClaw = Robot.oi.getRightStick().getRawButton(2);
     	if(CloseClaw)
     		Robot.claw.manual(-.5);
     	else if(OpenClaw)
     		Robot.claw.manual(.5);
     	else
-    		Robot.claw.manual(.001);
+    		Robot.claw.manual(0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -38,12 +43,10 @@ public class ManualClaw extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.claw.manual(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

@@ -11,6 +11,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class DriveToAuto extends CommandGroup {
     
     public  DriveToAuto() {
-    	addSequential(new DriveForward(4.5));				//Drives forward 4.5 feet
+    	addSequential(new DriveForward(10));				//Drives forward 4.5 feet
     }
 }

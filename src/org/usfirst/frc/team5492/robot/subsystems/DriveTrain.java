@@ -25,8 +25,8 @@ public class DriveTrain extends Subsystem {
 	private static final double Ki = 0.003;
 	private static final double Kd = 10.0;
 	private static final int izone = 50;
-    
-    double wheelSpeeds[] = new double[4];
+	private static final double ramprate = .5;
+	
     public DriveTrain(){
     	front_left_motor = new CANTalon(RobotMap.front_left_motor_CAN);
     	back_left_motor = new CANTalon(RobotMap.back_left_motor_CAN);
@@ -35,18 +35,22 @@ public class DriveTrain extends Subsystem {
     	drive = new RobotDrive(front_left_motor, back_left_motor,
 				front_right_motor, back_right_motor);
     	drive.setInvertedMotor(MotorType.kFrontRight, true);											// invert the left side motors
-    	drive.setInvertedMotor(MotorType.kRearRight, true);	    	
-    	front_right_motor.reverseOutput(true);																	// invert the left side motors
-    	back_right_motor.reverseOutput(true);																	// you may need to change or remove this to match your robot
+    	drive.setInvertedMotor(MotorType.kRearRight, true);											// you may need to change or remove this to match your robot
+    	front_right_motor.reverseOutput(true);
+    	front_right_motor.reverseSensor(true);
+    	back_right_motor.reverseOutput(true);
+    	back_right_motor.reverseSensor(true); 	
     	
     	front_left_motor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     	back_left_motor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     	front_right_motor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     	back_right_motor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+    	
+    	pdp = new PowerDistributionPanel();
     }
 
     public void initDefaultCommand() {
-    	 setDefaultCommand(new MecanumDriveWithJoysticks());									//Gets joystick input
+    	setDefaultCommand(new MecanumDriveWithJoysticks());									//Gets joystick input
     }
     
   //logs sensors
@@ -61,15 +65,15 @@ public class DriveTrain extends Subsystem {
         SmartDashboard.putNumber("Joystick Y", y);
         SmartDashboard.putNumber("Joystick Rotation", z);
         //Velocity values
-        SmartDashboard.putNumber("Front Left Velocity", front_left_motor.getEncVelocity()/wheelSpeeds[RobotMap.front_left_motor_CAN]);
-        SmartDashboard.putNumber("Back Left Velocity", back_left_motor.getEncVelocity()/wheelSpeeds[RobotMap.back_left_motor_CAN]);
-        SmartDashboard.putNumber("Front Right Velocity", front_right_motor.getEncVelocity()/wheelSpeeds[RobotMap.front_right_motor_CAN]);
-        SmartDashboard.putNumber("Back Right Velocity", back_right_motor.getEncVelocity()/wheelSpeeds[RobotMap.back_right_motor_CAN]);
+        SmartDashboard.putNumber("Front Left Position", front_left_motor.getEncPosition());
+        SmartDashboard.putNumber("Back Left Position", back_left_motor.getEncPosition());
+        SmartDashboard.putNumber("Front Right Position", front_right_motor.getEncPosition());
+        SmartDashboard.putNumber("Back Right Position", back_right_motor.getEncPosition());
         //Talon Temps
         SmartDashboard.putNumber("Front Left Temp", front_left_motor.getTemp());
-        SmartDashboard.putNumber("Back Left Temp", front_left_motor.getTemp());
-        SmartDashboard.putNumber("Front Right Temp", front_left_motor.getTemp());
-        SmartDashboard.putNumber("Back Right Temp", front_left_motor.getTemp());
+        SmartDashboard.putNumber("Back Left Temp", back_left_motor.getTemp());
+        SmartDashboard.putNumber("Front Right Temp", front_right_motor.getTemp());
+        SmartDashboard.putNumber("Back Right Temp", back_right_motor.getTemp());
         //Talon Currents
         SmartDashboard.putNumber("Front Left Current", current1);
         SmartDashboard.putNumber("Back Left Current", current2);
@@ -93,18 +97,19 @@ public class DriveTrain extends Subsystem {
     
     public void driveForward(double feet){
     	drivePosition();
-    	front_left_motor.set(findTicks(feet));
-        back_left_motor.set(findTicks(feet));
-        front_right_motor.set(findTicks(feet));
-        back_right_motor.set(findTicks(feet));
+    	front_left_motor.setPosition(findTicks(feet));
+        back_left_motor.setPosition(findTicks(feet));
+        front_right_motor.setPosition(findTicks(feet));
+        back_right_motor.setPosition( findTicks(feet));
+        
     }
     
     public void drivePosition(){
-    	setPIDs();
     	front_left_motor.changeControlMode(CANTalon.ControlMode.Position);
     	back_left_motor.changeControlMode(CANTalon.ControlMode.Position);
     	front_right_motor.changeControlMode(CANTalon.ControlMode.Position);
     	back_right_motor.changeControlMode(CANTalon.ControlMode.Position);
+    	setPIDs();    	
     }
     
     public void driveVbus(){
@@ -115,17 +120,13 @@ public class DriveTrain extends Subsystem {
     }
     
     private double findTicks(double feet){
-    	return (-feet * 12 * 360) / (2 * Math.PI * 3);			//Convert feet to ticks, 3 is radius of wheel
+    	return (-feet * 12 * 360 * 4.2) / (2 * Math.PI * 3);			//Convert feet to ticks, 3 is radius of wheel
     }
     
     private void setPIDs(){
-    	front_left_motor.setPID(Kp, Ki, Kd);
-    	back_left_motor.setPID(Kp, Ki, Kd);
-    	front_right_motor.setPID(Kp, Ki, Kd);
-    	back_right_motor.setPID(Kp, Ki, Kd);
-    	front_left_motor.setIZone(izone);
-    	back_left_motor.setIZone(izone);
-    	front_right_motor.setIZone(izone);
-    	back_right_motor.setIZone(izone);
+    	front_left_motor.setPID(Kp, Ki, Kd, 0, izone, ramprate, 1);
+    	back_left_motor.setPID(Kp, Ki, Kd, 0, izone, ramprate, 1);
+    	front_right_motor.setPID(Kp, Ki, Kd, 0, izone, ramprate, 1);
+    	back_right_motor.setPID(Kp, Ki, Kd, 0, izone, ramprate, 1);
     }
 }

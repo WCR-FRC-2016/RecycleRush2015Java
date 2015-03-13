@@ -9,7 +9,7 @@ import org.usfirst.frc.team5492.robot.RobotMap;
 public class PrepareToPickupLongTote extends CommandGroup {
     
     public  PrepareToPickupLongTote() {
-    	addParallel(new SetClawSetpoint(RobotMap.long_tote));												//Opens Claw to Long Tote length
-    	addSequential(new SetElevatorSetpoint(RobotMap.level_one));	//Moves to level 1
+    	addParallel(new SetClawSetpoint(RobotMap.long_tote));											//Opens Claw to Long Tote length
+    	addSequential(new SetElevatorSetpoint(RobotMap.level_one));								//Moves to level 1
     }
 }

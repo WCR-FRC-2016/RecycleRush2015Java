@@ -44,12 +44,12 @@ public class Elevator extends PIDSubsystem {
     }
     
     public void initDefaultCommand() {
-    	setDefaultCommand(new ManualElevator());
-        motor1_current = pdp.getCurrent(RobotMap.elevator_motor1_current);
-        motor2_current = pdp.getCurrent(RobotMap.elevator_motor2_current);
+    	setDefaultCommand(new ManualElevator());       
     }
     
     public void log(){
+    	 motor1_current = pdp.getCurrent(RobotMap.elevator_motor1_current);
+         motor2_current = pdp.getCurrent(RobotMap.elevator_motor2_current);
     	SmartDashboard.putData("Elevator Pot ", (AnalogPotentiometer) Elevator_Pot);
     	SmartDashboard.putNumber("Elevator Motor 1 Temp", Elevator_Motor1.getTemp());
     	SmartDashboard.putNumber("Elevator Motor 2 Temp", Elevator_Motor2.getTemp());

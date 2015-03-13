@@ -1,14 +1,16 @@
 
 package org.usfirst.frc.team5492.robot;
 
+import org.usfirst.frc.team5492.robot.commands.*;
 import org.usfirst.frc.team5492.robot.auto.*;
-
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
 import org.usfirst.frc.team5492.robot.subsystems.*;
 
 /**
@@ -38,12 +40,15 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         // instantiate the command used for the autonomous period
 		autoChooser = new SendableChooser();
-		autoChooser.addDefault("Default program(Move to Auto Zone)", new RobotToAuto());
+		autoChooser.addDefault("Default program(Do Nothing)", new DriveForward(0));
+		autoChooser.addObject("Drive to Auto Zone(No PID)", new RobotToAuto());
+		autoChooser.addObject("PID to Auto Zone", new DriveForward(4));
 		/*autoChooser.addObject("Move Can to Auto Zone", new CanToAuto());
 		autoChooser.addObject("Move Tote to Auto Zone", new ToteToAuto());
 		autoChooser.addObject("Move Can + Tote to Auto Zone", new CanAndToteToAuto());
 		autoChooser.addObject("Stacked Tote Set", new StackedToteSet());
 		autoChooser.addObject("Get Cans from Step", new CansFromStep());*/
+		SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
     }
 	
 	public void disabledPeriodic() {
@@ -51,8 +56,8 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-        // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+    	 autonomousCommand = (Command) autoChooser.getSelected();
+    	autonomousCommand.start();
     }
 
     /**
@@ -84,7 +89,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        //log();
+        log();
     }
     
     /**
@@ -95,8 +100,8 @@ public class Robot extends IterativeRobot {
     }
     
     private void log() {
-        elevator.log();
+        //elevator.log();
         drivetrain.log();
-        claw.log();
+        //claw.log();
     }
 }
