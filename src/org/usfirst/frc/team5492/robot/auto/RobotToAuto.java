@@ -12,7 +12,7 @@ public class RobotToAuto extends Command {
 
     public RobotToAuto() {
     	requires(Robot.drivetrain);
-    	setTimeout(3.0);
+    	setTimeout(3.5);
     }
 
     // Called just before this Command runs the first time

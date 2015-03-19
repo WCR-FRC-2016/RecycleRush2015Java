@@ -12,7 +12,7 @@ public class PickupCan extends CommandGroup {
 	public  PickupCan() {																																
     	addParallel(new OpenClaw());																												//Opens Claw
 		addSequential(new SetElevatorSetpoint(RobotMap.level_one));														//Moves to level one
-		addSequential(new SetClawSetpoint(RobotMap.can - RobotMap.claw_grab));								//Closes Claw
+		addSequential(new SetClawSetpoint(RobotMap.can));								//Closes Claw
 		addSequential(new SetElevatorSetpoint(RobotMap.level_two));														//Moves to level two
     }
 }

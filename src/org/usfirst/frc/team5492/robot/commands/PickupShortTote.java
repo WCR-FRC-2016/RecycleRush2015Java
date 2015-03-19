@@ -12,7 +12,7 @@ public class PickupShortTote extends CommandGroup {
 	public  PickupShortTote() {																																	//Activates wheel arm
     	addParallel(new OpenClaw());																															//Opens Claw
 		addSequential(new SetElevatorSetpoint(RobotMap.level_one));																	//Moves to level one
-		addSequential(new SetClawSetpoint(RobotMap.short_tote - RobotMap.claw_grab));								//Closes Claw
+		addSequential(new SetClawSetpoint(RobotMap.tote));								//Closes Claw
 		addSequential(new SetElevatorSetpoint(RobotMap.level_two));																	//Moves to level two
     }
 }

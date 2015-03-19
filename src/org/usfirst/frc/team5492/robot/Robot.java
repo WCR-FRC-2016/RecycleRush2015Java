@@ -36,13 +36,15 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {		
 		drivetrain = new DriveTrain();
+		elevator = new Elevator();
 		claw = new Claw();
 		oi = new OI();
         // instantiate the command used for the autonomous period
 		autoChooser = new SendableChooser();
 		autoChooser.addDefault("Default program(Do Nothing)", new DriveForward(0));
-		autoChooser.addObject("Drive to Auto Zone(No PID)", new RobotToAuto());
-		autoChooser.addObject("PID to Auto Zone", new DriveForward(4));
+		autoChooser.addDefault("Drive to Auto Zone(No PID)", new RobotToAuto());
+		//autoChooser.addObject("PID to Auto Zone", new DriveForward(10));
+		//autoChooser.addObject("Strafe Right", new StrafeRight(3));
 		/*autoChooser.addObject("Move Can to Auto Zone", new CanToAuto());
 		autoChooser.addObject("Move Tote to Auto Zone", new ToteToAuto());
 		autoChooser.addObject("Move Can + Tote to Auto Zone", new CanAndToteToAuto());
@@ -57,7 +59,7 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
     	 autonomousCommand = (Command) autoChooser.getSelected();
-    	autonomousCommand.start();
+    	 autonomousCommand.start();
     }
 
     /**
@@ -102,6 +104,6 @@ public class Robot extends IterativeRobot {
     private void log() {
         //elevator.log();
         drivetrain.log();
-        //claw.log();
+        claw.log();
     }
 }

@@ -1,8 +1,8 @@
 package org.usfirst.frc.team5492.robot.subsystems;
 
-
-import org.usfirst.frc.team5492.robot.commands.ManualClaw;
 import org.usfirst.frc.team5492.robot.RobotMap;
+import org.usfirst.frc.team5492.robot.commands.ManualClaw;
+import org.usfirst.frc.team5492.robot.commands.StopMaxClaw;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -10,24 +10,28 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
  *	Contains all methods for Controlling Claw
  */
 public class Claw extends PIDSubsystem {
-	PowerDistributionPanel pdp;
+	private PowerDistributionPanel pdp;
 	private CANTalon Claw_Motor;
 	private AnalogPotentiometer Claw_Pot;
+	private DigitalInput max_LS, min_LS;
 	
-	private static final double kP = 0.0, kI = 0.0, kD = 0.0;
+	private static final double kP = 5.0, kI = 0.0, kD = 0.0;
     // Initialize your subsystem here
     public Claw() {
     	super(kP, kI, kD);
     	setAbsoluteTolerance(0.005);
-    	//Claw_Motor = new CANTalon(RobotMap.Claw_Motor_CAN);
+    	Claw_Motor = new CANTalon(RobotMap.Claw_Motor_CAN);
     	Claw_Pot = new AnalogPotentiometer(RobotMap.Claw_Pot_AI, 3600, 0);
     	LiveWindow.addSensor("Claw", "Pot", (AnalogPotentiometer)Claw_Pot);
     	LiveWindow.addActuator("Claw",  "PID", getPIDController());
+    	//max_LS = new DigitalInput(RobotMap.claw_max_LS);
+    	//min_LS = new DigitalInput(RobotMap.claw_min_LS);
     }
     
     public void manual(double setpoint){
@@ -35,18 +39,20 @@ public class Claw extends PIDSubsystem {
     }
     
     public void initDefaultCommand() {
-    	//setDefaultCommand(new ManualClaw());
+    	
+    	//setDefaultCommand(new StopMaxClaw());
+    	setDefaultCommand(new ManualClaw());
     }
     
     
     public void log(){
-    	SmartDashboard.putData("Claw Pot", (AnalogPotentiometer) Claw_Pot);
+    	SmartDashboard.putNumber("Claw Pot",  Claw_Pot.get());
     	SmartDashboard.putNumber("Claw Motor Temp",  Claw_Motor.getTemp());
-    	SmartDashboard.putNumber("Claw Motor Current", pdp.getCurrent(RobotMap.claw_motor_current));
+    //	SmartDashboard.putNumber("Claw Motor Current", pdp.getCurrent(RobotMap.claw_motor_current));
     }
     
     public boolean isClosed(){
-    	return getSetpoint() == RobotMap.close_claw;
+    	return getSetpoint() == RobotMap.min_claw;
     }
     
     public boolean isOpen(){
@@ -60,7 +66,7 @@ public class Claw extends PIDSubsystem {
     protected void usePIDOutput(double output) {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
-    	Claw_Motor.set(output);
+    	Claw_Motor.set(-output * .5);
     }
     
     /**
@@ -74,7 +80,7 @@ public class Claw extends PIDSubsystem {
      * Set the claw motor to move in the close direction.
      */
     public void close() {
-        setSetpoint(RobotMap.close_claw);
+        setSetpoint(RobotMap.tote);
     }
     
     /**
@@ -82,5 +88,13 @@ public class Claw extends PIDSubsystem {
      */
     public void stop() {
         Claw_Motor.set(0);
+    }
+    
+    public boolean getMaxLS(){
+    	return max_LS.get();
+    }
+    
+    public boolean getMinLS(){
+    	return min_LS.get();
     }
 }

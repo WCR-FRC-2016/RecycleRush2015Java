@@ -25,7 +25,7 @@ public class DriveTrain extends Subsystem {
 	private static final double Ki = 0.003;
 	private static final double Kd = 10.0;
 	private static final int izone = 50;
-	private static final double ramprate = .5;
+	private static final double  ramprate = 2;
 	
     public DriveTrain(){
     	front_left_motor = new CANTalon(RobotMap.front_left_motor_CAN);
@@ -89,10 +89,10 @@ public class DriveTrain extends Subsystem {
     public void strafeRight(double feet){
     	drivePosition();
     	feet = feet +  (feet * .33);
-    	front_left_motor.set(findTicks(feet));
-        back_left_motor.set(findTicks(-feet));
-    	front_right_motor.set(findTicks(-feet));
-        back_right_motor.set(findTicks(feet));
+    	front_left_motor.setPosition(findTicks(feet));
+        back_left_motor.setPosition(findTicks(-feet));
+    	front_right_motor.setPosition(findTicks(-feet));
+        back_right_motor.setPosition(findTicks(feet));
     }
     
     public void driveForward(double feet){

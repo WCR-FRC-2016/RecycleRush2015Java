@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5492.robot.commands;
 
 import org.usfirst.frc.team5492.robot.Robot;
+import org.usfirst.frc.team5492.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -26,11 +27,15 @@ public class ManualClaw extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	CloseClaw = Robot.oi.getRightStick().getRawButton(1);
-    	OpenClaw = Robot.oi.getRightStick().getRawButton(2);
+    	CloseClaw = Robot.oi.getRightStick().getRawButton(2);
+    	OpenClaw = Robot.oi.getRightStick().getRawButton(1);
+    	if(Robot.claw.getPosition() >= RobotMap.max_claw && CloseClaw) {
+    		CloseClaw = false;
+    	}else if(Robot.claw.getPosition()<= RobotMap.min_claw && OpenClaw)
+    		OpenClaw = false;
     	if(CloseClaw)
     		Robot.claw.manual(-.5);
-    	else if(OpenClaw)
+    	else if(OpenClaw)    		
     		Robot.claw.manual(.5);
     	else
     		Robot.claw.manual(0);

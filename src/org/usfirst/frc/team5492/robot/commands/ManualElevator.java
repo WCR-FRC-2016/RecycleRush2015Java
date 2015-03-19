@@ -8,11 +8,13 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ManualElevator extends Command {
+	double elevatorjoy;
 
     public ManualElevator() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.elevator);
+    	elevatorjoy = 0;
     }
 
     // Called just before this Command runs the first time
@@ -21,7 +23,13 @@ public class ManualElevator extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.elevator.manual(Robot.oi.getRightStick().getRawAxis(1));
+    	elevatorjoy = -Robot.oi.getRightStick().getRawAxis(1);    	
+    	if(Robot.elevator.getMaxLS() && elevatorjoy < 0) {
+    		elevatorjoy = 0;
+    	}else if(Robot.elevator.getMinLS() && elevatorjoy > 0)
+    		elevatorjoy = 0;
+    	Robot.elevator.manual(elevatorjoy);
+    			elevatorjoy = 0;    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
