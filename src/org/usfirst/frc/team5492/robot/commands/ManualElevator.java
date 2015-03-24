@@ -1,37 +1,40 @@
 package org.usfirst.frc.team5492.robot.commands;
 
-import org.usfirst.frc.team5492.robot.RobotMap;
 import org.usfirst.frc.team5492.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class SetWheelSetpoint extends Command {
-	private double setpoint;
+public class ManualElevator extends Command {
+	double elevatorjoy;
 
-    public SetWheelSetpoint(double setpoint) {
+    public ManualElevator() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.wheelarm);
-    	if(setpoint > RobotMap.long_tote_wheel)
-    		setpoint = RobotMap.long_tote_wheel;
-    	if(setpoint < RobotMap.close_wheel);
+    	requires(Robot.elevator);
+    	elevatorjoy = 0;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.wheelarm.enable();
-    	Robot.wheelarm.setSetpoint(setpoint);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	elevatorjoy = -Robot.oi.getRightStick().getRawAxis(1);    	
+    	if(Robot.elevator.getMaxLS() && elevatorjoy < 0) {
+    		elevatorjoy = 0;
+    	}else if(Robot.elevator.getMinLS() && elevatorjoy > 0)
+    		elevatorjoy = 0;
+    	Robot.elevator.manual(elevatorjoy);
+    			elevatorjoy = 0;    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.wheelarm.onTarget();
+        return false;
     }
 
     // Called once after isFinished returns true

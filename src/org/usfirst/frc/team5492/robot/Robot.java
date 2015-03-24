@@ -1,14 +1,16 @@
 
 package org.usfirst.frc.team5492.robot;
 
+import org.usfirst.frc.team5492.robot.commands.*;
 import org.usfirst.frc.team5492.robot.auto.*;
-
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
 import org.usfirst.frc.team5492.robot.subsystems.*;
 
 /**
@@ -20,8 +22,7 @@ import org.usfirst.frc.team5492.robot.subsystems.*;
  */
 public class Robot extends IterativeRobot {
 	
-	public static DriveTrain drivetrain;	
-	public static WheelArm wheelarm;
+	public static DriveTrain drivetrain;
 	public static Elevator elevator;
 	public static Claw claw;
 	public static OI oi;
@@ -33,20 +34,24 @@ public class Robot extends IterativeRobot {
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
-    public void robotInit() {
-		oi = new OI();
+    public void robotInit() {		
 		drivetrain = new DriveTrain();
+		elevator = new Elevator();
 		claw = new Claw();
-		wheelarm = new WheelArm();
+		oi = new OI();
         // instantiate the command used for the autonomous period
 		autoChooser = new SendableChooser();
-		autoChooser.addDefault("Default program(Move to Auto Zone)", new DriveToAuto());
-		autoChooser.addObject("Move Can to Auto Zone", new CanToAuto());
+		autoChooser.addDefault("Default program(Do Nothing)", new DriveForward(0));
+		autoChooser.addDefault("Drive to Auto Zone", new RobotToAuto());
+		//autoChooser.addObject("Drive to Auto Zone", new RobotToAutoBump());
+		//autoChooser.addObject("PID to Auto Zone", new DriveForward(10));
+		//autoChooser.addObject("Strafe Right", new StrafeRight(3));
+		/*autoChooser.addObject("Move Can to Auto Zone", new CanToAuto());
 		autoChooser.addObject("Move Tote to Auto Zone", new ToteToAuto());
 		autoChooser.addObject("Move Can + Tote to Auto Zone", new CanAndToteToAuto());
 		autoChooser.addObject("Stacked Tote Set", new StackedToteSet());
-		autoChooser.addObject("Get Cans from Step", new CansFromStep());
-		autoChooser.addObject("Start Stacking Grey Totes", new StackGreyTotes());
+		autoChooser.addObject("Get Cans from Step", new CansFromStep());*/
+		SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
     }
 	
 	public void disabledPeriodic() {
@@ -54,8 +59,8 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-        // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+    	 autonomousCommand = (Command) autoChooser.getSelected();
+    	 autonomousCommand.start();
     }
 
     /**
@@ -98,8 +103,8 @@ public class Robot extends IterativeRobot {
     }
     
     private void log() {
-    	//wheelarm.log();
-        elevator.log();
+        //elevator.log();
         drivetrain.log();
         claw.log();
-    }}
+    }
+}

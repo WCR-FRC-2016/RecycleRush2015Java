@@ -4,14 +4,16 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team5492.robot.Robot;
 
 /**
- * This gets input from the joysticks & then calls DriveTrain class
+ *
  */
-public class MecanumDriveWithJoysticks extends Command {
-
-    public MecanumDriveWithJoysticks() {
+public class SetClaw extends Command {
+	private double setpoint;
+	
+    public SetClaw(double setpoint) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivetrain);
+    	this.setpoint = setpoint;
+    	requires(Robot.claw);
     }
 
     // Called just before this Command runs the first time
@@ -20,25 +22,20 @@ public class MecanumDriveWithJoysticks extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double x = Robot.oi.getLeftStick().getRawAxis(3) - Robot.oi.getLeftStick().getRawAxis(2);
-    	double y = Robot.oi.getLeftStick().getRawAxis(1);
-    	double z = Robot.oi.getLeftStick().getRawAxis(4);
-    	if(Math.abs(x) < .2)
-    		x = 0;
-    	if(Math.abs(y) < .2)
-    		y = 0;
-    	if(Math.abs(z) < .2)
-    		z = 0;
-    	Robot.drivetrain.drive(x * .75, y * .75, z * .75, 0);
+    	if(this.setpoint >= Robot.claw.pot() - 5)
+    		Robot.claw.manual(-.3);
+    	else if(this.setpoint <= Robot.claw.pot() + 5)
+    		Robot.claw.manual(.3);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return this.setpoint > Robot.claw.pot() - 5 && this.setpoint < Robot.claw.pot() + 5;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.claw.manual(0);
     }
 
     // Called when another command which requires one or more of the same

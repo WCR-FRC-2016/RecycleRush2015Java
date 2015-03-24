@@ -1,35 +1,37 @@
-package org.usfirst.frc.team5492.robot.commands;
+package org.usfirst.frc.team5492.robot.auto;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team5492.robot.Robot;
 
 /**
- * Mainly for Auton - you input  certain amount of feet to drive forward or negative feet to drive back
+ *
  */
-public class DriveForward extends Command {
-	double feet;
-	int count;
-    public DriveForward(double feet) {
+public class RobotToAutoBump extends Command {
+	long startTime;
+	long elapsedTime;
+
+    public RobotToAutoBump() {
     	requires(Robot.drivetrain);
-    	this.feet = feet;
+    	setTimeout(2.875);
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
-    	Robot.drivetrain.driveForward(feet);
+    protected void initialize() {    	
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
+    protected void execute() {   
+    	Robot.drivetrain.drive(0, -.4, 0, 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	return isTimedOut();
     }
 
     // Called once after isFinished returns true
-    protected void end() {
+    protected void end() { 
+    	Robot.drivetrain.drive(0, 0, 0, 0);
     }
 
     // Called when another command which requires one or more of the same
