@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TalonSRX;
-import edu.wpi.first.wpilibj.Victor;
 
 /**
  *	Contains all methods for controlling Elevator
