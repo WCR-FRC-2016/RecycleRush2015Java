@@ -12,11 +12,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CanAndToteToAuto extends CommandGroup {
     
     public  CanAndToteToAuto() {
-    	addSequential(new CloseClaw());																									//Closes Claw
+    	addSequential(new SetClawSetpoint(RobotMap.can));																//Closes Claw
     	addSequential(new SetElevatorSetpoint(RobotMap.level_two + (RobotMap.level_two / 2)));	//Moves Elevator to Level 2.5
-    	addSequential(new StrafeRight(-2));																								//Strafes Left 2 feet
+    	addSequential(new StrafeRight(2));										     														//Strafes Left 2 feet
     	addParallel(new OpenClaw());																											//Opens Claw
-    	addSequential(new PickupItem());																									//Pickups tote/claw to level two
+    	addSequential(new PickupTote());																									//Pickups tote/claw to level two
     	addSequential(new DriveForward(-7));																							//Drives backwards 7 feet
     }
 }

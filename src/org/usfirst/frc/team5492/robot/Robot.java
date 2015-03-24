@@ -42,7 +42,8 @@ public class Robot extends IterativeRobot {
         // instantiate the command used for the autonomous period
 		autoChooser = new SendableChooser();
 		autoChooser.addDefault("Default program(Do Nothing)", new DriveForward(0));
-		autoChooser.addDefault("Drive to Auto Zone(No PID)", new RobotToAuto());
+		autoChooser.addDefault("Drive to Auto Zone", new RobotToAuto());
+		//autoChooser.addObject("Drive to Auto Zone", new RobotToAutoBump());
 		//autoChooser.addObject("PID to Auto Zone", new DriveForward(10));
 		//autoChooser.addObject("Strafe Right", new StrafeRight(3));
 		/*autoChooser.addObject("Move Can to Auto Zone", new CanToAuto());

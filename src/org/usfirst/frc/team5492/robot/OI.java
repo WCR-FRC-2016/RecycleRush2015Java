@@ -31,6 +31,7 @@ public class OI {
         */
         //CloseClaw.whenPressed(new CloseClaw()); 
        //OpenClaw.whenPressed(new OpenClaw());
+        //OpenClaw.whenPressed(new SetClaw(525));
        /* PrepareLong.whenPressed(new PrepareToPickupLongTote());
         PrepareShort.whenPressed(new PrepareToPickupShortTote());
         if(Elevator == -1)

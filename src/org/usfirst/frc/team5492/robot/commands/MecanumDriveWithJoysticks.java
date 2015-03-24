@@ -29,7 +29,7 @@ public class MecanumDriveWithJoysticks extends Command {
     		y = 0;
     	if(Math.abs(z) < .2)
     		z = 0;
-    	Robot.drivetrain.drive(x, y, z, 0);
+    	Robot.drivetrain.drive(x * .75, y * .75, z * .75, 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()

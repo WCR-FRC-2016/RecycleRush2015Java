@@ -7,12 +7,13 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class PickupShortTote extends CommandGroup {
+public class PickupTote extends CommandGroup {
     
-	public  PickupShortTote() {																																	//Activates wheel arm
+	public  PickupTote() {																																				//Activates wheel arm
+		addSequential(new SetElevatorSetpoint(RobotMap.level_two));																	//Moves to level 2
     	addParallel(new OpenClaw());																															//Opens Claw
 		addSequential(new SetElevatorSetpoint(RobotMap.level_one));																	//Moves to level one
-		addSequential(new SetClawSetpoint(RobotMap.tote));								//Closes Claw
+		addSequential(new SetClawSetpoint(RobotMap.tote));																				//Closes Claw
 		addSequential(new SetElevatorSetpoint(RobotMap.level_two));																	//Moves to level two
     }
 }

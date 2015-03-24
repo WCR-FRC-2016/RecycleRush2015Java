@@ -4,6 +4,7 @@ import org.usfirst.frc.team5492.robot.Robot;
 import org.usfirst.frc.team5492.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -15,10 +16,9 @@ public class ManualClaw extends Command {
 
     public ManualClaw() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.claw);
     	CloseClaw = false;
-    	OpenClaw = false;
+    	OpenClaw = false; 			
     }
 
     // Called just before this Command runs the first time
@@ -27,18 +27,29 @@ public class ManualClaw extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	CloseClaw = Robot.oi.getRightStick().getRawButton(2);
-    	OpenClaw = Robot.oi.getRightStick().getRawButton(1);
+    	CloseClaw = Robot.oi.getRightStick().getRawButton(1);
+    	OpenClaw = Robot.oi.getRightStick().getRawButton(2);
+    	SmartDashboard.putBoolean("CloseClaw",  CloseClaw);
+    	SmartDashboard.putBoolean("OpenClaw", CloseClaw);
+    	if(Robot.claw.getPosition() <= RobotMap.max_claw && CloseClaw)
+    		Robot.claw.manual(-.65);
+    	else if(Robot.claw.getPosition() >= RobotMap.min_claw && OpenClaw)
+    		Robot.claw.manual(.65);
+    	else
+    			Robot.claw.manual(0);
+    			
+    	/*	
     	if(Robot.claw.getPosition() >= RobotMap.max_claw && CloseClaw) {
     		CloseClaw = false;
     	}else if(Robot.claw.getPosition()<= RobotMap.min_claw && OpenClaw)
     		OpenClaw = false;
     	if(CloseClaw)
-    		Robot.claw.manual(-.5);
+    		Robot.claw.manual(-.65);
     	else if(OpenClaw)    		
-    		Robot.claw.manual(.5);
+    		Robot.claw.manual(.65);
     	else
     		Robot.claw.manual(0);
+    		*/
     }
 
     // Make this return true when this Command no longer needs to run execute()

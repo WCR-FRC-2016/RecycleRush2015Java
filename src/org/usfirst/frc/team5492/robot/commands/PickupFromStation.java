@@ -12,7 +12,7 @@ public class PickupFromStation extends CommandGroup {
     public  PickupFromStation() {
     	addSequential(new OpenClaw());																									//Opens Claw
     	addSequential(new SetElevatorSetpoint(RobotMap.level_two));													//Moves to level 2
-    	addSequential(new CloseClaw());																									//Closes Claw
+    	addSequential(new PickupTote());																									//Closes Claw
     	addSequential(new SetElevatorSetpoint(RobotMap.level_three));												//Moves to level 3
     }
 }

@@ -6,13 +6,13 @@ import org.usfirst.frc.team5492.robot.Robot;
 /**
  *
  */
-public class RobotToAuto extends Command {
+public class RobotToAutoBump extends Command {
 	long startTime;
 	long elapsedTime;
 
-    public RobotToAuto() {
+    public RobotToAutoBump() {
     	requires(Robot.drivetrain);
-    	setTimeout(2.825);
+    	setTimeout(2.875);
     }
 
     // Called just before this Command runs the first time

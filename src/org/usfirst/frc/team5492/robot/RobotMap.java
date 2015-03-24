@@ -8,15 +8,15 @@ package org.usfirst.frc.team5492.robot;
 public class RobotMap {
 	//CANs
 	//DriveTrain
-	public static int front_left_motor_CAN = 4;
-	public static int back_left_motor_CAN = 0;
-	public static int front_right_motor_CAN = 1;
-	public static int back_right_motor_CAN = 2;
+	public static int front_left_motor_CAN = 2;
+	public static int back_left_motor_CAN = 1;
+	public static int front_right_motor_CAN = 0;
+	public static int back_right_motor_CAN = 3;
 	//Elevator
-	public static int Elevator_Motor1_CAN = 5;
+	public static int Elevator_Motor1_CAN = 4;
 	public static int Elevator_Motor2_CAN = 6;
 	//Claw
-	public static int Claw_Motor_CAN = 3;
+	public static int Claw_Motor_CAN = 5;
 	//Wheel Arm
 	public static int Wheel_Motor1_CAN = 0;
 	public static int Wheel_Motor2_CAN = 0;
@@ -74,11 +74,13 @@ public class RobotMap {
     public static double level_four = 1006.56;
     public static double level_five = 1342.08;
     public static double level_six = 1677.6;
+    public static double max_elevator = 0;
+    public static double min_elevator = 0;
     
     //Setpoints for Claw
     public static double can = 1300;
     public static double tote = 1245;
     public static double open_claw = 1800;
-    public static double max_claw = 2950;
-    public static double min_claw = 900;
+    public static double max_claw = 2000;
+    public static double min_claw = 250;
 }

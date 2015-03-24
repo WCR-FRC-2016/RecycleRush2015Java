@@ -21,11 +21,11 @@ public class DriveTrain extends Subsystem {
     double current1, current2, current3, current4;
     PowerDistributionPanel pdp;
 	
-	private static final double Kp = 0.4;
-	private static final double Ki = 0.003;
-	private static final double Kd = 10.0;
-	private static final int izone = 50;
-	private static final double  ramprate = 2;
+	private double Kp = 0.4;
+	private double Ki = 0.003;
+	private double Kd = 10.0;
+	private  int izone = 50;
+	private double  ramprate = 2;
 	
     public DriveTrain(){
     	front_left_motor = new CANTalon(RobotMap.front_left_motor_CAN);
@@ -60,20 +60,11 @@ public class DriveTrain extends Subsystem {
 		 current2 = pdp.getCurrent(RobotMap.back_left_current);
 		 current3 = pdp.getCurrent(RobotMap.front_right_current);
 		 current4 = pdp.getCurrent(RobotMap.back_right_current);
-    	//Joystick Inputs
-    	SmartDashboard.putNumber("Joystick X", x);
-        SmartDashboard.putNumber("Joystick Y", y);
-        SmartDashboard.putNumber("Joystick Rotation", z);
         //Velocity values
         SmartDashboard.putNumber("Front Left Position", front_left_motor.getEncPosition());
         SmartDashboard.putNumber("Back Left Position", back_left_motor.getEncPosition());
         SmartDashboard.putNumber("Front Right Position", front_right_motor.getEncPosition());
         SmartDashboard.putNumber("Back Right Position", back_right_motor.getEncPosition());
-        //Talon Temps
-        SmartDashboard.putNumber("Front Left Temp", front_left_motor.getTemp());
-        SmartDashboard.putNumber("Back Left Temp", back_left_motor.getTemp());
-        SmartDashboard.putNumber("Front Right Temp", front_right_motor.getTemp());
-        SmartDashboard.putNumber("Back Right Temp", back_right_motor.getTemp());
         //Talon Currents
         SmartDashboard.putNumber("Front Left Current", current1);
         SmartDashboard.putNumber("Back Left Current", current2);
