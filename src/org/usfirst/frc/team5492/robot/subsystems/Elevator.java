@@ -18,7 +18,6 @@ import edu.wpi.first.wpilibj.TalonSRX;
  *	Contains all methods for controlling Elevator
  */
 public class Elevator extends PIDSubsystem {
-	private SpeedController Elevator_Motor_PWM;
 	private PowerDistributionPanel pdp;
 	private CANTalon Elevator_Motor1;
 	private CANTalon Elevator_Motor2;
@@ -35,23 +34,17 @@ public class Elevator extends PIDSubsystem {
     // Initialize your subsystem here
     public Elevator() {
     	super(kP, kI, kD);
-    	Elevator_Motor_PWM = new TalonSRX(1);
         setAbsoluteTolerance(0.005);
         Elevator_Motor1 = new CANTalon(RobotMap.Elevator_Motor1_CAN);
         Elevator_Motor2 = new CANTalon(RobotMap.Elevator_Motor2_CAN);
         Elevator_Pot = new AnalogPotentiometer(RobotMap.Elevator_Pot_AI, 3600, 0);        
         max_LS = new DigitalInput(RobotMap.elevator_max_LS);
         min_LS = new DigitalInput(RobotMap.elevator_min_LS);
-        
-        LiveWindow.addActuator("Elevator", "Motor", (TalonSRX) Elevator_Motor_PWM);
-        LiveWindow.addSensor("Elevator",  "Pot",  (AnalogPotentiometer) Elevator_Pot);
-        LiveWindow.addActuator("Elevator", "PID", getPIDController());
     }
     
     public void manual(double setpoint){
     	Elevator_Motor1.set(setpoint);
     	Elevator_Motor2.set(setpoint);
-    	Elevator_Motor_PWM.set(setpoint);
     }
     
     public void initDefaultCommand() {
@@ -79,7 +72,6 @@ public class Elevator extends PIDSubsystem {
     	StopMaxElevator();
     	Elevator_Motor1.set(output);
     	Elevator_Motor2.set(output);
-    	Elevator_Motor_PWM.set(output);
     }
 
     private void StopMaxElevator(){

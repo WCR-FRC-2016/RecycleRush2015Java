@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5492.robot.commands;
 
 import org.usfirst.frc.team5492.robot.Robot;
+import org.usfirst.frc.team5492.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -23,7 +24,13 @@ public class ManualElevator extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	elevatorjoy = -Robot.oi.getRightStick().getRawAxis(1);    	
+    	elevatorjoy = -Robot.oi.getRightStick().getRawAxis(1); 
+    	
+    	/*if((current >= RobotMap.elevator_max_current || getPosition() >= RobotMap.max_claw) && output < 0){
+    		output = 0;
+    	}else if((current <= RobotMap.elevator_min_current || getPosition() <= RobotMap.min_claw) && output > 0){
+    		output = 0;
+    	}*/
     	if(Robot.elevator.getMaxLS() && elevatorjoy < 0) {
     		elevatorjoy = 0;
     	}else if(Robot.elevator.getMinLS() && elevatorjoy > 0)

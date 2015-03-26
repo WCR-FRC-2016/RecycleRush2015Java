@@ -104,7 +104,7 @@ public class Robot extends IterativeRobot {
     
     private void log() {
         //elevator.log();
-        drivetrain.log();
+        //drivetrain.log();
         claw.log();
     }
 }

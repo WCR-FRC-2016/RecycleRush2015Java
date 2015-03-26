@@ -18,33 +18,25 @@ public class Claw extends PIDSubsystem {
 	private PowerDistributionPanel pdp;
 	private CANTalon Claw_Motor;
 	private AnalogPotentiometer Claw_Pot;
-	private SpeedController Claw_Motor_PWM;
 	private double current;
 	private double output;
 	
-	private static final double kP = 5.0, kI = 0.0, kD = 0.0;
+	private static final double kP = 0.009, kI = 0.0, kD = 0.005;
     // Initialize your subsystem here
     public Claw() {
     	super(kP, kI, kD);
-    	Claw_Motor_PWM = new TalonSRX(0);
     	setAbsoluteTolerance(0.005);
     	Claw_Motor = new CANTalon(RobotMap.Claw_Motor_CAN);
     	Claw_Pot = new AnalogPotentiometer(RobotMap.Claw_Pot_AI, 3600, 0);
-    	current = pdp.getCurrent(RobotMap.claw_motor_current);
-    	
-    	LiveWindow.addActuator("Claw", "Motor", (TalonSRX) Claw_Motor_PWM);
-    	LiveWindow.addSensor("Claw", "Pot", (AnalogPotentiometer)Claw_Pot);
-    	LiveWindow.addActuator("Claw",  "PID", getPIDController());
+    	pdp = new PowerDistributionPanel();
+    	current = 0.0;
     }
     
     public void manual(double setpoint){
-    	Claw_Motor.set(setpoint);
+    	Claw_Motor.set(setpoint); 	
     }
     
     public void initDefaultCommand() {
-    	
-    	//setDefaultCommand(new StopMaxClaw());
-    	setDefaultCommand(new ManualClaw());
     }
     
     
@@ -70,15 +62,14 @@ public class Claw extends PIDSubsystem {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
     	this.output = output;
-    	StopMaxClaw();
-    	Claw_Motor.set(-output * .5);
-    	Claw_Motor_PWM.set(-output * .5);
+    	//StopMaxClaw();
+    	Claw_Motor.set(-output);
     }
     
     private void StopMaxClaw(){
-    	if((current >= RobotMap.elevator_max_current || getPosition() >= RobotMap.max_claw) && output > 0){
+    	if((current >= RobotMap.elevator_max_current || getPosition() >= RobotMap.max_claw) && output < 0){
     		output = 0;
-    	}else if((current <= RobotMap.elevator_min_current || getPosition() <= RobotMap.min_claw) && output < 0){
+    	}else if((current <= RobotMap.elevator_min_current || getPosition() <= RobotMap.min_claw) && output > 0){
     		output = 0;
     	}
     }
@@ -92,6 +83,5 @@ public class Claw extends PIDSubsystem {
      */
     public void stop() {
         Claw_Motor.set(0);
-        Claw_Motor_PWM.set(0);
     }
 }

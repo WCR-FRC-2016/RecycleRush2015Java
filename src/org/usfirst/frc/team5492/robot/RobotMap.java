@@ -78,9 +78,9 @@ public class RobotMap {
     public static double min_elevator = 0;
     
     //Setpoints for Claw
-    public static double can = 1300;
-    public static double tote = 1245;
-    public static double open_claw = 1800;
+    public static double can = 3000;
+    public static double tote = 3000;
+    public static double open_claw = 2500;
     public static double max_claw = 2000;
-    public static double min_claw = 250;
+    public static double min_claw = 3500;
 }
