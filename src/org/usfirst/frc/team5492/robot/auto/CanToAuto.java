@@ -12,8 +12,9 @@ import org.usfirst.frc.team5492.robot.commands.*;
 public class CanToAuto extends CommandGroup {
     
     public  CanToAuto() {
-    	addSequential(new PickupCan());																									//Closes Claw
-    	addParallel(new SetElevatorSetpoint(RobotMap.level_one + (RobotMap.level_one / 2)));			//Moves Elevator to 1.5
-    	addSequential(new DriveForward(-7));																							//Drives back 7 feet
+    	addSequential(new TimeElevator(.3, -.5));
+    	addSequential(new SetClawSetpoint(RobotMap.can));																	//Closes Claw
+    	addSequential(new TimeElevator(1, -.5));
+    	addSequential(new TimeDrive(2.5, .4));																						//Drives back    	
     }
 }

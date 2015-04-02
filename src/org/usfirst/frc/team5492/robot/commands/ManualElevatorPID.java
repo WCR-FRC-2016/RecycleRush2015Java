@@ -9,16 +9,15 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ManualClaw extends Command {
+public class ManualElevatorPID extends Command {
+	double elevatorjoy;
 	PowerDistributionPanel pdp;
-	boolean CloseClaw;
-	boolean OpenClaw;
 
-    public ManualClaw() {
+    public ManualElevatorPID() {
         // Use requires() here to declare subsystem dependencies
-    	requires(Robot.claw);
-    	CloseClaw = false;
-    	OpenClaw = false; 	
+        // eg. requires(chassis);
+    	requires(Robot.elevator);
+    	elevatorjoy = 0;
     	pdp = new PowerDistributionPanel();
     }
 
@@ -27,39 +26,28 @@ public class ManualClaw extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {    	
-    	CloseClaw = Robot.oi.getRightStick().getRawButton(1);
-    	OpenClaw = Robot.oi.getRightStick().getRawButton(2);
-    	double current = pdp.getCurrent(RobotMap.claw_motor_current);
+    protected void execute() {
+    	elevatorjoy = -Robot.oi.getRightStick().getRawAxis(1); 
+    	double current = pdp.getCurrent(RobotMap.elevator_motor1_current);
     	
-    	if(CloseClaw || OpenClaw)
-    		Robot.claw.disable();
-    	
-    	if(current > RobotMap.claw_max_current){
-    		OpenClaw = false;
-    		CloseClaw = false;
-    	}
-    	
-    	if(Robot.claw.getPosition() <= RobotMap.min_claw) {
-    		CloseClaw = false;
-    	}else if(Robot.claw.getPosition()>= RobotMap.max_claw)
-    		OpenClaw = false;
-    	if(CloseClaw)
-    		Robot.claw.manual(-.65);
-    	else if(OpenClaw)    		
-    		Robot.claw.manual(.65);
-    	else
-    		Robot.claw.manual(0);
-    		
+    	//if(current >= RobotMap.elevator_max_current)
+    			//elevatorjoy = 0;
+    	if(Robot.elevator.getPosition() < RobotMap.min_elevator && elevatorjoy > 0) {
+    		elevatorjoy = 0;
+    	}else if(Robot.elevator.getPosition() > RobotMap.max_elevator && elevatorjoy < 0)
+    		elevatorjoy = 0;
+    	Robot.elevator.manual(elevatorjoy); 	
     }
+    	
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return elevatorjoy == 0;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.elevator.setSetpoint(Robot.elevator.getPosition());
     }
 
     // Called when another command which requires one or more of the same

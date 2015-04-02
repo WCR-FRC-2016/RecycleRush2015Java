@@ -1,37 +1,39 @@
-package org.usfirst.frc.team5492.robot.auto;
+package org.usfirst.frc.team5492.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+
 import org.usfirst.frc.team5492.robot.Robot;
 
 /**
  *
  */
-public class RobotToAutoBump extends Command {
-	long startTime;
-	long elapsedTime;
-
-    public RobotToAutoBump() {
-    	requires(Robot.drivetrain);
-    	setTimeout(2.875);
+public class TimeElevator extends Command {
+	double speed;
+    public TimeElevator(double time, double speed) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.elevator);
+    	setTimeout(time);
+    	this.speed = speed;
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {    	
+    protected void initialize() {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {   
-    	Robot.drivetrain.drive(0, -.4, 0, 0);
+    protected void execute() {
+    	Robot.elevator.manual(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return isTimedOut();
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
-    protected void end() { 
-    	Robot.drivetrain.drive(0, 0, 0, 0);
+    protected void end() {
+    	Robot.elevator.manual(0);
     }
 
     // Called when another command which requires one or more of the same

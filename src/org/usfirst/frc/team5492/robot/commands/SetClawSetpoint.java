@@ -14,6 +14,7 @@ public class SetClawSetpoint extends Command {
         // eg. requires(chassis);
     	this.setpoint = setpoint;
     	requires(Robot.claw);
+    	setTimeout(2.5);
     }
 
     // Called just before this Command runs the first time
@@ -24,11 +25,12 @@ public class SetClawSetpoint extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	    }
+    	
+    }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.claw.onTarget();
+        return Robot.claw.onTarget() || isTimedOut();
     }
 
     // Called once after isFinished returns true

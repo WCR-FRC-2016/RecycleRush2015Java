@@ -20,14 +20,14 @@ public class Claw extends PIDSubsystem {
 	private AnalogPotentiometer Claw_Pot;
 	private double current;
 	private double output;
-	
-	private static final double kP = 0.009, kI = 0.0, kD = 0.005;
+
+	private static final double kP = 0.008, kI = 0.0, kD = 0.0;
     // Initialize your subsystem here
     public Claw() {
     	super(kP, kI, kD);
-    	setAbsoluteTolerance(0.005);
+    	setAbsoluteTolerance(5);
     	Claw_Motor = new CANTalon(RobotMap.Claw_Motor_CAN);
-    	Claw_Pot = new AnalogPotentiometer(RobotMap.Claw_Pot_AI, 3600, 0);
+    	Claw_Pot = new AnalogPotentiometer(RobotMap.Claw_Pot_AI, -3600, 3600);
     	pdp = new PowerDistributionPanel();
     	current = 0.0;
     }
@@ -37,6 +37,7 @@ public class Claw extends PIDSubsystem {
     }
     
     public void initDefaultCommand() {
+    	setDefaultCommand(new ManualClaw());
     }
     
     
@@ -62,16 +63,13 @@ public class Claw extends PIDSubsystem {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
     	this.output = output;
-    	//StopMaxClaw();
-    	Claw_Motor.set(-output);
+    	StopMaxClaw();
+    	Claw_Motor.set(output);
     }
     
     private void StopMaxClaw(){
-    	if((current >= RobotMap.elevator_max_current || getPosition() >= RobotMap.max_claw) && output < 0){
-    		output = 0;
-    	}else if((current <= RobotMap.elevator_min_current || getPosition() <= RobotMap.min_claw) && output > 0){
-    		output = 0;
-    	}
+    	if((current >= RobotMap.claw_max_current))
+    			disable();
     }
     
     public double pot(){

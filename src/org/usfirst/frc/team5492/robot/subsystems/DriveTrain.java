@@ -74,6 +74,9 @@ public class DriveTrain extends Subsystem {
     
     public void drive(double x, double y, double z, double gyroAngle){
     	driveVbus();
+    	//x *= .818;
+    	//y *= .818;
+    	//z *= .818;
     	drive.mecanumDrive_Cartesian(x, y, z, gyroAngle);
     }
     

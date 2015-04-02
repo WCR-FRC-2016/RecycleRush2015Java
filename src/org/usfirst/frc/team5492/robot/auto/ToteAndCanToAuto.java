@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  * Moves can & tote to auto
  * Assumes Robot claw is around tote
  */
-public class CanAndToteToAuto extends CommandGroup {
+public class ToteAndCanToAuto extends CommandGroup {
     
-    public  CanAndToteToAuto() {
+    public  ToteAndCanToAuto() {
     	addSequential(new SetClawSetpoint(RobotMap.can));																//Closes Claw
     	addSequential(new SetElevatorSetpoint(RobotMap.level_two + (RobotMap.level_two / 2)));	//Moves Elevator to Level 2.5
     	addSequential(new StrafeRight(2));										     														//Strafes Left 2 feet

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5492.robot.subsystems;
 
+import org.usfirst.frc.team5492.robot.Robot;
 import org.usfirst.frc.team5492.robot.RobotMap;
 import org.usfirst.frc.team5492.robot.commands.ManualElevator;
 
@@ -25,7 +26,7 @@ public class Elevator extends PIDSubsystem {
 	private DigitalInput max_LS, min_LS;
 	private double output;
 	
-	private static final double kP = 0.0, kI = 0.0, kD = 0.0;
+	private static final double kP = .00875, kI = 0.000005, kD = 0.001;
 	
 	private static double motor1_current;
 	private static double motor2_current;
@@ -34,12 +35,13 @@ public class Elevator extends PIDSubsystem {
     // Initialize your subsystem here
     public Elevator() {
     	super(kP, kI, kD);
-        setAbsoluteTolerance(0.005);
+        setAbsoluteTolerance(10);
         Elevator_Motor1 = new CANTalon(RobotMap.Elevator_Motor1_CAN);
         Elevator_Motor2 = new CANTalon(RobotMap.Elevator_Motor2_CAN);
-        Elevator_Pot = new AnalogPotentiometer(RobotMap.Elevator_Pot_AI, 3600, 0);        
+        Elevator_Pot = new AnalogPotentiometer(RobotMap.Elevator_Pot_AI, -3600, 3600);        
         max_LS = new DigitalInput(RobotMap.elevator_max_LS);
         min_LS = new DigitalInput(RobotMap.elevator_min_LS);
+        pdp = new PowerDistributionPanel();
     }
     
     public void manual(double setpoint){
@@ -54,24 +56,23 @@ public class Elevator extends PIDSubsystem {
     public void log(){
     	 motor1_current = pdp.getCurrent(RobotMap.elevator_motor1_current);
          motor2_current = pdp.getCurrent(RobotMap.elevator_motor2_current);
-    	SmartDashboard.putData("Elevator Pot ", (AnalogPotentiometer) Elevator_Pot);
-    	SmartDashboard.putNumber("Elevator Motor 1 Temp", Elevator_Motor1.getTemp());
-    	SmartDashboard.putNumber("Elevator Motor 2 Temp", Elevator_Motor2.getTemp());
+    	SmartDashboard.putNumber("Elevator Pot ", Elevator_Pot.get());
     	SmartDashboard.putNumber("Elevator Motor Current",motor1_current);
-    	SmartDashboard.putNumber("Eleevator Motor 2 current", motor2_current);
+    	SmartDashboard.putNumber("Elevator Motor 2 current", motor2_current);
+    	if(getPIDController().getError() > 100)
+    		getPIDController().setPID(kP, 0, kD);
     }
     
     protected double returnPIDInput() {
     	return Elevator_Pot.get();
     }
     
-    protected void usePIDOutput(double output) {
-        // Use output to drive your system, like a motor
-        // e.g. yourMotor.set(output);
+    protected void usePIDOutput(double output) {    	
+    	output = -output * .7;
     	this.output = output;
-    	StopMaxElevator();
+    	//StopMaxElevator();
     	Elevator_Motor1.set(output);
-    	Elevator_Motor2.set(output);
+    	Elevator_Motor2.set(output);    	
     }
 
     private void StopMaxElevator(){
@@ -83,7 +84,7 @@ public class Elevator extends PIDSubsystem {
     	
     	if((current >= RobotMap.elevator_max_current || getPosition() >= RobotMap.max_elevator || getMaxLS()) && output > 0){
     		output = 0;
-    	}else if((current <= RobotMap.elevator_min_current || getPosition() <= RobotMap.min_elevator || getMinLS()) && output < 0){
+    	}else if((current >= RobotMap.elevator_max_current || getPosition() <= RobotMap.min_elevator || getMinLS()) && output < 0){
     		output = 0;
     	}
     }

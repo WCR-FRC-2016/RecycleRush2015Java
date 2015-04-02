@@ -1,6 +1,8 @@
 package org.usfirst.frc.team5492.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+
+import org.usfirst.frc.team5492.robot.Robot;
 import org.usfirst.frc.team5492.robot.RobotMap;
 
 /**
@@ -10,9 +12,10 @@ import org.usfirst.frc.team5492.robot.RobotMap;
 public class PickupFromStation extends CommandGroup {
     
     public  PickupFromStation() {
+    	addSequential(new CheckLevelThree());
     	addSequential(new OpenClaw());																									//Opens Claw
     	addSequential(new SetElevatorSetpoint(RobotMap.level_two));													//Moves to level 2
-    	addSequential(new PickupTote());																									//Closes Claw
-    	addSequential(new SetElevatorSetpoint(RobotMap.level_three));												//Moves to level 3
+    	addSequential(new SetClawSetpoint(RobotMap.tote));																												//Closes Claw
+    	addSequential(new SetElevatorSetpoint(RobotMap.player_station));
     }
 }

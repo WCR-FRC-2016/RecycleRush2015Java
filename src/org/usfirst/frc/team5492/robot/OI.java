@@ -21,14 +21,23 @@ public class OI {
     Joystick rightStick = new Joystick(1);
     
     public OI(){
-    	Button OpenClaw = new JoystickButton(rightStick, 2);				//Thumb to Open Claw
-        Button PickupTote = new JoystickButton(rightStick, 1);				//Trigger to Close Claw
-        Button PickupCan = new JoystickButton(rightStick, 5);				//Trigger to Pickup Can
+    	Button OpenClaw = new JoystickButton(rightStick, 3);				//Thumb to Open Claw2
+        Button PickupTote = new JoystickButton(rightStick, 5);				//Trigger to Close Claw1
+        Button PickupCan = new JoystickButton(rightStick, 6);				//Trigger to Pickup Can5
         Button OVERRIDE = new JoystickButton(rightStick, 11);				//#8 on stick, to switch to manual control in case something breaks
-        PickupTote.whenPressed(new SetClawSetpoint(RobotMap.tote)); 
-       OpenClaw.whenPressed(new OpenClaw());
-       //PickupCan.whenPressed(new PickupCan());
+        Button Player_station = new JoystickButton(rightStick, 4);
+        Button up = new JoystickButton(rightStick, 4);
+        Button level1 = new JoystickButton(rightStick, 7);
+        Button level2 = new JoystickButton(rightStick, 8);
+        Button level3 = new JoystickButton(rightStick, 9);
+        Button level4 = new JoystickButton(rightStick, 10);
+        Button level5 = new JoystickButton(rightStick, 12);
+       Player_station.whenPressed(new PickupFromStation());
+        //PickupTote.whenPressed(new SetClawSetpoint(RobotMap.tote)); 
+       //OpenClaw.whenPressed(new OpenClaw());
+       //PickupCan.whenPressed(new SetClawSetpoint(RobotMap.can));
        OVERRIDE.whileHeld(new ManualControl());
+       //up.whenPressed(new SetElevatorSetpoint(RobotMap.level_three));        
     }
 	
 	public Joystick getLeftStick() {

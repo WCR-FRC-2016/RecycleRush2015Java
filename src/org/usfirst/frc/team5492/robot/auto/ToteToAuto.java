@@ -2,12 +2,13 @@ package org.usfirst.frc.team5492.robot.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team5492.robot.commands.*;
+
 /**
  *
  */
-public class RobotToAuto extends CommandGroup {
+public class ToteToAuto extends CommandGroup {
     
-    public  RobotToAuto() {
-    	addSequential(new TimeDrive(2, -.4));
+    public  ToteToAuto() {
+        addSequential(new TimeDrive(2.825, -.4));
     }
 }
