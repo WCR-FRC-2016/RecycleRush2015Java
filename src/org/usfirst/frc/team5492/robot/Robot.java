@@ -52,7 +52,8 @@ public class Robot extends IterativeRobot {
 		autoChooser.addDefault("Default program(Do Nothing)", new TimeDrive(0, 0));
 		autoChooser.addObject("Drive Forward from LandFill to Auto Zone", new RobotToAuto());
 		autoChooser.addObject("Drive Forward with Tote to Auto Zone", new ToteToAuto());
-		autoChooser.addObject("Move Backwards with Can to Auto Zone", new CanToAuto());
+		autoChooser.addObject("Drive Forward with Tote to Auto Zone *BUMP*", new ToteToAutoBump());
+		//autoChooser.addObject("Move Backwards with Can to Auto Zone", new CanToAuto());
 		//autoChooser.addObject("Move Can + Tote to Auto Zone", new CanAndToteToAuto());
 		//autoChooser.addObject("Stacked Tote Set", new StackedToteSet());
 		SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);

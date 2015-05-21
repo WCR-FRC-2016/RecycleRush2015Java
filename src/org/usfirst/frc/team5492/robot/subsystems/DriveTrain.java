@@ -60,11 +60,6 @@ public class DriveTrain extends Subsystem {
 		 current2 = pdp.getCurrent(RobotMap.back_left_current);
 		 current3 = pdp.getCurrent(RobotMap.front_right_current);
 		 current4 = pdp.getCurrent(RobotMap.back_right_current);
-        //Velocity values
-        SmartDashboard.putNumber("Front Left Position", front_left_motor.getEncPosition());
-        SmartDashboard.putNumber("Back Left Position", back_left_motor.getEncPosition());
-        SmartDashboard.putNumber("Front Right Position", front_right_motor.getEncPosition());
-        SmartDashboard.putNumber("Back Right Position", back_right_motor.getEncPosition());
         //Talon Currents
         SmartDashboard.putNumber("Front Left Current", current1);
         SmartDashboard.putNumber("Back Left Current", current2);
@@ -74,9 +69,9 @@ public class DriveTrain extends Subsystem {
     
     public void drive(double x, double y, double z, double gyroAngle){
     	driveVbus();
-    	//x *= .818;
-    	//y *= .818;
-    	//z *= .818;
+    	x *= .818;
+    	y *= .818;
+    	z *= .65;
     	drive.mecanumDrive_Cartesian(x, y, z, gyroAngle);
     }
     

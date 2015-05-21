@@ -32,11 +32,11 @@ public class OI {
         Button level3 = new JoystickButton(rightStick, 9);
         Button level4 = new JoystickButton(rightStick, 10);
         Button level5 = new JoystickButton(rightStick, 12);
-       Player_station.whenPressed(new PickupFromStation());
+       //Player_station.whenPressed(new PickupFromStation());
         //PickupTote.whenPressed(new SetClawSetpoint(RobotMap.tote)); 
        //OpenClaw.whenPressed(new OpenClaw());
        //PickupCan.whenPressed(new SetClawSetpoint(RobotMap.can));
-       OVERRIDE.whileHeld(new ManualControl());
+       //OVERRIDE.whileHeld(new ManualControl());
        //up.whenPressed(new SetElevatorSetpoint(RobotMap.level_three));        
     }
 	

@@ -1,7 +1,9 @@
 package org.usfirst.frc.team5492.robot.commands;
 
 import org.usfirst.frc.team5492.robot.Robot;
+
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+
 import org.usfirst.frc.team5492.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -30,10 +32,7 @@ public class ManualClaw extends Command {
     protected void execute() {    	
     	CloseClaw = Robot.oi.getRightStick().getRawButton(1);
     	OpenClaw = Robot.oi.getRightStick().getRawButton(2);
-    	double current = pdp.getCurrent(RobotMap.claw_motor_current);
-    	
-    	if(CloseClaw || OpenClaw)
-    		Robot.claw.disable();
+    	double current = Robot.claw.getCurrent();
     	
     	if(current > RobotMap.claw_max_current){
     		OpenClaw = false;
@@ -45,9 +44,9 @@ public class ManualClaw extends Command {
     	}else if(Robot.claw.getPosition()>= RobotMap.max_claw)
     		OpenClaw = false;
     	if(CloseClaw)
-    		Robot.claw.manual(-.65);
-    	else if(OpenClaw)    		
     		Robot.claw.manual(.65);
+    	else if(OpenClaw)    		
+    		Robot.claw.manual(-.65);
     	else
     		Robot.claw.manual(0);
     		

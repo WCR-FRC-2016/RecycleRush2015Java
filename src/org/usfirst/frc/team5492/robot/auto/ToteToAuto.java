@@ -9,6 +9,6 @@ import org.usfirst.frc.team5492.robot.commands.*;
 public class ToteToAuto extends CommandGroup {
     
     public  ToteToAuto() {
-        addSequential(new TimeDrive(2.825, -.4));
+        addSequential(new TimeDrive(3.390, -.4));
     }
 }

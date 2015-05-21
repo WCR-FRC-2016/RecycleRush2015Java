@@ -27,13 +27,15 @@ public class ManualControl extends Command {
     	boolean CloseClaw = Robot.oi.getRightStick().getRawButton(1);
     	boolean OpenClaw = Robot.oi.getRightStick().getRawButton(2);
     	double claw_current = pdp.getCurrent(RobotMap.claw_motor_current);
+    	
     	if(claw_current > RobotMap.claw_max_current){
     		OpenClaw = false;
     		CloseClaw = false;
     	}
-    	if(CloseClaw)
+    	
+    	if(CloseClaw && claw_current < RobotMap.claw_max_current)
     		Robot.claw.manual(-.65);
-    	else if(OpenClaw)    		
+    	else if(OpenClaw && claw_current < RobotMap.claw_max_current)    		
     		Robot.claw.manual(.65);
     	else
     		Robot.claw.manual(0);

@@ -27,7 +27,7 @@ public class Claw extends PIDSubsystem {
     	super(kP, kI, kD);
     	setAbsoluteTolerance(5);
     	Claw_Motor = new CANTalon(RobotMap.Claw_Motor_CAN);
-    	Claw_Pot = new AnalogPotentiometer(RobotMap.Claw_Pot_AI, -3600, 3600);
+    	Claw_Pot = new AnalogPotentiometer(RobotMap.Claw_Pot_AI, 3600, 0);//-3600, 3600);
     	pdp = new PowerDistributionPanel();
     	current = 0.0;
     }
@@ -42,9 +42,13 @@ public class Claw extends PIDSubsystem {
     
     
     public void log(){
-    	current = pdp.getCurrent(RobotMap.claw_motor_current);
+    	current = Claw_Motor.getOutputCurrent();
     	SmartDashboard.putNumber("Claw Pot",  Claw_Pot.get());
     	SmartDashboard.putNumber("Claw Motor Current", current);
+    }
+    
+    public double getCurrent(){
+    	return Claw_Motor.getOutputCurrent();
     }
     
     public boolean isClosed(){
@@ -68,8 +72,8 @@ public class Claw extends PIDSubsystem {
     }
     
     private void StopMaxClaw(){
-    	if((current >= RobotMap.claw_max_current))
-    			disable();
+    	if(current >= RobotMap.claw_max_current)
+    		output = 0;
     }
     
     public double pot(){

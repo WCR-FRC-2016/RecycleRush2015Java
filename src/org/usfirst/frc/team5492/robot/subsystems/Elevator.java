@@ -54,13 +54,22 @@ public class Elevator extends PIDSubsystem {
     }
     
     public void log(){
-    	 motor1_current = pdp.getCurrent(RobotMap.elevator_motor1_current);
-         motor2_current = pdp.getCurrent(RobotMap.elevator_motor2_current);
+    	 motor1_current = Elevator_Motor1.getOutputCurrent();
+         motor2_current = Elevator_Motor2.getOutputCurrent();
     	SmartDashboard.putNumber("Elevator Pot ", Elevator_Pot.get());
     	SmartDashboard.putNumber("Elevator Motor Current",motor1_current);
     	SmartDashboard.putNumber("Elevator Motor 2 current", motor2_current);
     	if(getPIDController().getError() > 100)
     		getPIDController().setPID(kP, 0, kD);
+    }
+    
+    public double getCurrent(){
+    	double current;
+    	if(motor1_current > motor2_current)
+    		current = motor2_current;
+    	else
+    		current = motor1_current;
+    	return current;
     }
     
     protected double returnPIDInput() {
@@ -70,9 +79,9 @@ public class Elevator extends PIDSubsystem {
     protected void usePIDOutput(double output) {    	
     	output = -output * .7;
     	this.output = output;
-    	//StopMaxElevator();
-    	Elevator_Motor1.set(output);
-    	Elevator_Motor2.set(output);    	
+    	StopMaxElevator();
+    	Elevator_Motor1.set(this.output);
+    	Elevator_Motor2.set(this.output);    	
     }
 
     private void StopMaxElevator(){
@@ -81,12 +90,8 @@ public class Elevator extends PIDSubsystem {
     		current = motor2_current;
     	else
     		current = motor1_current;
-    	
-    	if((current >= RobotMap.elevator_max_current || getPosition() >= RobotMap.max_elevator || getMaxLS()) && output > 0){
+    	if(current > RobotMap.elevator_max_current)
     		output = 0;
-    	}else if((current >= RobotMap.elevator_max_current || getPosition() <= RobotMap.min_elevator || getMinLS()) && output < 0){
-    		output = 0;
-    	}
     }
     
     public boolean getMaxLS(){

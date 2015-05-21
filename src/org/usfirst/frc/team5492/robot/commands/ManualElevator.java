@@ -1,10 +1,13 @@
 package org.usfirst.frc.team5492.robot.commands;
 
 import org.usfirst.frc.team5492.robot.Robot;
+
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+
 import org.usfirst.frc.team5492.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -28,17 +31,19 @@ public class ManualElevator extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	elevatorjoy = -Robot.oi.getRightStick().getRawAxis(1); 
-    	double current = pdp.getCurrent(RobotMap.elevator_motor1_current);
+    	double current = Robot.elevator.getCurrent();
     	 
     	if(current >= RobotMap.elevator_max_current)
     			elevatorjoy = 0;
     	
-    	if(elevatorjoy < -.15 || elevatorjoy > .15)
-    		Robot.elevator.disable();
-    	
-    	if(Robot.elevator.getPosition() < RobotMap.min_elevator && elevatorjoy > 0) {
+    	/*if(Robot.elevator.getPosition() < RobotMap.min_elevator && elevatorjoy > 0) {
     		elevatorjoy = 0;
     	}else if(Robot.elevator.getPosition() > RobotMap.max_elevator && elevatorjoy < 0)
+    		elevatorjoy = 0;
+    		*/
+    	if(Robot.elevator.getMinLS() && elevatorjoy > 0) {
+    		elevatorjoy = 0;
+    	}else if(Robot.elevator.getMaxLS() && elevatorjoy < 0)
     		elevatorjoy = 0;
     	Robot.elevator.manual(elevatorjoy); 	
     }
